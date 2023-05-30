@@ -1,112 +1,3 @@
-<?php
-require '../vendor/autoload.php'; // Certifique-se de ter instalado a biblioteca ReactPHP usando o Composer
-
-use React\Promise\Promise;
-use React\Promise\Deferred;
-tiktokdownload($_POST['url'])
-    ->then(function($result) {
-        $url = $result['nowm'];
-        $url2 = $result['wm'];
-        $audio = $result['wm'];
-        $_SESSION['nowm'] = $url;
-        $_SESSION['wm']   = $url2;
-        $_SESSION['audio']= $audio;
-        if (!$url && !$audio && !$url2) {
-            echo 'alert("Invalid link.")';
-            header("Location: /");
-        }
-    });
-function tiktokdownload($url) {
-    return new Promise(function($resolve, $reject) use ($url) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://ttdownloader.com/');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        $response = curl_exec($ch);
-        $error = curl_error($ch);
-        curl_close($ch);
-
-        if ($response === false) {
-            $reject(array('status' => false, 'message' => 'error fetch data', 'e' => $error));
-        }
-
-        preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $response, $matches);
-        $cookies = array();
-        foreach($matches[1] as $item) {
-            parse_str($item, $cookie);
-            $cookies = array_merge($cookies, $cookie);
-        }
-
-        $dataPost = array(
-            'url' => $url,
-            'format' => '',
-            'token' => ''
-        );
-
-        $dom = new DOMDocument();
-        libxml_use_internal_errors(true);
-        $dom->loadHTML($response);
-        libxml_clear_errors();
-
-        $xpath = new DOMXPath($dom);
-
-        $tokenElement = $xpath->query('//*[@id="token"]')->item(0);
-        if ($tokenElement) {
-            $dataPost['token'] = $tokenElement->getAttribute('value');
-        }
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://ttdownloader.com/search/');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataPost));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
-            'Origin: https://ttdownloader.com',
-            'Referer: https://ttdownloader.com/',
-            'Cookie: ' . http_build_query($cookies, '', '; ')
-        ));
-        $response = curl_exec($ch);
-        $error = curl_error($ch);
-        curl_close($ch);
-
-        if ($response === false) {
-            $reject(array('status' => false, 'message' => 'error fetch data', 'e' => $error));
-        }
-
-        $dom = new DOMDocument();
-        libxml_use_internal_errors(true);
-        $dom->loadHTML($response);
-        libxml_clear_errors();
-
-        $result = array(
-            'nowm' => null,
-            'wm' => null,
-            'audio' => null
-        );
-
-        $xpath = new DOMXPath($dom);
-
-        $nowmNode = $xpath->query('//*[@id="results-list"]/div[1]/div[2]/a')->item(0);
-        if ($nowmNode) {
-            $result['nowm'] = $nowmNode->getAttribute('href');
-        }
-
-        $wmNode = $xpath->query('//*[@id="results-list"]/div[2]/div[2]/a')->item(0);
-        if ($wmNode) {
-            $result['wm'] = $wmNode->getAttribute('href');
-        }
-
-        $audioNode = $xpath->query('//*[@id="results-list"]/div[3]/div[2]/a')->item(0);
-        if ($audioNode) {
-            $result['audio'] = $audioNode->getAttribute('href');
-        }
-        
-        $resolve($result);
-    });
-}
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -196,18 +87,28 @@ function tiktokdownload($url) {
   </div>
 </nav>
 
-<div class="d-flex align-items-center justify-content-center ">
-  <div id="download" class="download p-5">
-    <div class="video-links" style="display:contents;">
-      <a href="download.php?url=<?=$_SESSION['nowm']?>&format=mp4" class="button download-file">
-        <i class="icon icon-down"></i>No Watermark Video MP4
-      </a>
-      <a href="download.php?url=<?=$_SESSION['wm']?>&format=mp4" class="button download-file is-secondary mt-3">
-        With Watermark MP4
-      </a>
-      <a href="download.php?url=<?=$_SESSION['audio']?>&format=mp3" class="button is-black mt-3">Audio</a>
-    </div>
-  </div>
+<div class="columns">
+<div class="column is-12">
+<div>
+<h1 class="mt-0 mb-4 title is-1">Privacy Policy – NwTik</h1>
+</div>
+<div>
+<h2 class="mt-3 h3">Personal identification information</h2>
+<p>Users may visit NwTik App anonymously. We never record the identification information of our Users and will only collect personal identification information from Users if they voluntarily submit such information to us. Users can always refuse to supply personal identification information. However, if they agree to supply they are responsible for providing exact and correct identification information of themselves. NwTik is not responsible for any fake or incorrect information provided by the Users. If we discover such incidents we would ban Users from accessing and using NwTik App and our Services.</p>
+</div>
+<div>
+<h2 class="mt-3 h3">Advertising</h2>
+<p>We accept advertisements (Ads) on NwTik App to maintain and support our own research and development on NwTik App for non-commercial purposes. Ads appearing on NwTik App may be delivered to Users by advertising partners who may set cookies. They will only compile non-personal identification information about you or others who use your computer and do not track personal information about you, such as your name, email address, and physical address. You may dismiss the use of the cookies or cease access to our application and website at any time as Users of NwTik are not required to accept the Ads. </p>
+</div>
+<div>
+<h2 class="mt-3 h3">Changes to this privacy policy</h2>
+<p>NwTik has the discretion to update this privacy policy at any time. When we do, we will post a notification on the main page of NwTik App, revise the updated date on the top of this page. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect. You acknowledge and agree that it is your responsibility to review this privacy policy periodically and become aware of modifications.</p>
+</div>
+<div>
+<h2 class="mt-3 h3">Your acceptance of these terms</h2>
+<p>By accessing and using NwTik App, you express your voluntary acceptance of this policy. If not, please do not use our Services. Your continued use of the Services following the posting of changes to this policy will be deemed your acceptance of those changes.</p>
+</div>
+</div>
 </div>
 
 
@@ -227,5 +128,3 @@ function tiktokdownload($url) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
