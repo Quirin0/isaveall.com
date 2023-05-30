@@ -7,7 +7,8 @@ tiktokdownload($_POST['url'])
     ->then(function($result) {
         $url = $result['nowm'];
         $url2 = $result['wm'];
-        $audio = $result['audio'];
+        $audio = $result['wm'];
+        echo $audio;
         $_SESSION['nowm'] = $url;
         $_SESSION['wm']   = $url2;
         $_SESSION['audio']= $audio;
