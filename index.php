@@ -79,7 +79,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Donate</a>
+          <a class="nav-link" href="https://www.paypal.com/donate/?business=CMZFVZ6ETHGLQ&no_recurring=0&item_name=Hey%2C+thank+you+for+donation+%3C3&currency_code=BRL">Donate</a>
         </li>
         
       </ul>
