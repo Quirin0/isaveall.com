@@ -140,12 +140,7 @@ height: 225px;overflow: scroll;">
     });
   }
 </script>
-<div class="columns mt-3">
-<div class="column is-main">
 
-<div class="ad-box">
-
-</div>
 
 </div>
 </div>
@@ -291,10 +286,8 @@ height: 225px;overflow: scroll;">
 </section>
 <footer class="footer">
 <div class="container">
-<div class="ad-box">
 
-</div>
-<div class="copyright"><span>© 2019 - 2023 NwTik - <a href="/">TikTok Video Download</a> Version 1.0</span></div>
+<div class="copyright"><span>© 2023 - 2023 NwTik - <a href="/">TikTok Video Download</a> Version 1.0</span></div>
 <p class="footer-menu">
 <a href="https://NwTik.com/landing/contact" rel="nofollow">Contact</a> | <a href="https://NwTik.com/landing/terms-of-service" rel="nofollow">Terms of Service</a> | <a href="https://NwTik.com/landing/privacy-policy" rel="nofollow">Privacy Policy</a>
 </p>
