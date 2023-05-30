@@ -14,7 +14,7 @@
 <meta name="description" content="TikTok Video Downloader - NwTik.com is one of the best free Download video Tiktok No Watermark tool available online. You can download TikTok video from any device you have.">
 <meta name="author" content="Admin" />
 <meta itemprop="image" content="https://NwTik.com/assets/img/snapthumb.jpg">
-<meta name="google" content="notranslate" />
+<meta name="google" content="translate" />
 <!-- TWITTER -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tiktok Downloader - Download Video tiktok Without Watermark - NwTik">
@@ -67,49 +67,61 @@
 <script src="https://kit.fontawesome.com/faa9bc7328.js" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+
+        function translatePage(language) {
+            google.translate.translatePage(language);
+        }
+
+        function translatePageToUserLanguage() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(translatePageBasedOnLocation);
+            } else {
+                console.log('Geolocation is not supported by this browser.');
+            }
+        }
+
+        function translatePageBasedOnLocation(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const geocoder = new google.maps.Geocoder();
+
+            geocoder.geocode({ 'location': { lat: latitude, lng: longitude } }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        const userCountry = results[0].address_components.find(component => component.types.includes('country'));
+                        const countryCode = userCountry.short_name;
+                        const userLanguage = navigator.language || navigator.userLanguage;
+
+                        const languageCode = userLanguage.split('-')[0] || countryCode;
+
+                        translatePage(languageCode);
+                    }
+                } else {
+                    console.log('Geocoder failed due to: ' + status);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-  <a href="https://NwTik.com/" class="navbar-brand fs24 fw700 align-items-center" title="TikTok Downloader">Nw<span>Tik</span></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <a href="https://NwTik.com/" class="navbar-brand fs24 fw700 align-items-center" title="TikTok Downloader" style="color:#4B2570; font-size:28px">Nw<span style="color:black;">Tik</span></a>
+    
+    <div role="button" class="navbar-burger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span></span><span></span><span></span></div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="#">Donate</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Languages
-          </a>
-          <ul class="dropdown-menu" style="
-height: 225px;overflow: scroll;">
-            <li><a class="dropdown-item" href="/">English</a></li>
-            <li><a class="dropdown-item" href="/ID" data-hl="ID">Bahasa Indonesia</a></li>
-            <li><a class="dropdown-item" href="/vn" data-hl="vn">Tiếng Việt</a></li>
-            <li><a class="dropdown-item" href="/ms" data-hl="ms">Bahasa Malaysia</a></li>
-            <li><a class="dropdown-item" href="/cs" data-hl="cs">Čeština</a></li>
-            <li><a class="dropdown-item" href="/es" data-hl="es">Español</a></li>
-            <li><a class="dropdown-item" href="/fr" data-hl="fr">Français</a></li>
-            <li><a class="dropdown-item" href="/de" data-hl="de">German</a></li>
-            <li><a class="dropdown-item" href="/it" data-hl="it">Italian</a></li>
-            <li><a class="dropdown-item" href="/hu" data-hl="hu">Magyar</a></li>
-            <li><a class="dropdown-item" href="/nl" data-hl="nl">Nederlands</a></li>
-            <li><a class="dropdown-item" href="/pl" data-hl="pl">Polish</a></li>
-            <li><a class="dropdown-item" href="/pt" data-hl="pt">Português</a></li>
-            <li><a class="dropdown-item" href="/ro" data-hl="ro">Română</a></li>
-            <li><a class="dropdown-item" href="/th" data-hl="th">Thailand</a></li>
-            <li><a class="dropdown-item" href="/tr" data-hl="tr">Turkish (Turkey)</a </li>
-            <li><a class="dropdown-item" href="/el" data-hl="el">Ελληνικά</a></li>
-            <li><a class="dropdown-item" href="/uk" data-hl="uk">украї́нська мо́ва</a </li>
-            <li><a class="dropdown-item" href="/ru" data-hl="ru">Русский</a></li>
-            <li><a class="dropdown-item" href="/ar" data-hl="ar">عَرَبِيّ</a></li>
-            <li><a class="dropdown-item" href="/ko" data-hl="ko">한국어</a></li>
-            <li><a class="dropdown-item" href="/ja" data-hl="ja">日本語</a></li>
-          </ul>
-        </li>
+        
       </ul>
     </div>
   </div>
@@ -118,10 +130,10 @@ height: 225px;overflow: scroll;">
 
 <section id="hero" class="section hero">
 <div class="container w100">
-<h1 class="title">TikTok Video Download</h1>
-<h2 class="title title-2">Without Watermark. Fast. All devices</h2>
+<h1 class="title">No Watermark TikTok Video Downloader</h1>
+<h2 class="text-center text-white title-2">Fast, Easy and for All devices.</h2>
 
-<form class="form" name="formurl" method="post" action="download/index.php">
+<form class="form pb-5" name="formurl" method="post" action="download/index.php">
   <div class="message">
     <div class="message-body"></div>
   </div>
@@ -129,7 +141,26 @@ height: 225px;overflow: scroll;">
     <input name="url" id="url" type="text" class="link-input" value="" placeholder="Paste TikTok link here" required="" aria-label="Name" autocomplete="off" autocapitalize="none">
     <button class="button button-paste" type="button" onclick="pasteFromClipboard()"><i class="fas fa-clipboard" style="margin-right: 5px;"></i><span>Paste</span></button>
   </div>
-  <button download="tiktok-downloader-Quirinox" type="submit" aria-label="Get" class="button button-go is-link"><i class="fas fa-cloud-download-alt"></i>Download</button>
+  <style>
+    @keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse-animation {
+  animation: pulse 1.5s infinite;
+}
+  </style>
+    <button download="tiktok-downloader-Quirinox" type="submit" aria-label="Get" class="button button-go is-link pulse-animation">
+        <i class="fas fa-cloud-download-alt"></i> Download
+    </button>
   <div class="get-loader flex-center"><span class="NwTik-loader"></span></div>
 </form>
 
