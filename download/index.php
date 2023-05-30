@@ -8,7 +8,6 @@ tiktokdownload($_POST['url'])
         $url = $result['nowm'];
         $url2 = $result['wm'];
         $audio = $result['wm'];
-        echo $audio;
         $_SESSION['nowm'] = $url;
         $_SESSION['wm']   = $url2;
         $_SESSION['audio']= $audio;
@@ -197,13 +196,20 @@ function tiktokdownload($url) {
   </div>
 </nav>
 
-<div id="download" class="download p-5">
-<div class="video-links">
-<a href="download.php?url=<?=$_SESSION['nowm']?>&format=mp4"  class="button download-file" ><i class="icon icon-down"></i>No Watermark Video MP4</a>
-<a href="download.php?url=<?=$_SESSION['wm']?>&format=mp4"  class="button download-file is-secondary mt-3" >With Watermark MP4</a>
-<a href="download.php?url=<?=$_SESSION['audio']?>&format=mp3"  class="button is-black mt-3">Audio</a>
+<div class="d-flex align-items-center justify-content-center ">
+  <div id="download" class="download p-5">
+    <div class="video-links" style="display:contents;">
+      <a href="download.php?url=<?=$_SESSION['nowm']?>&format=mp4" class="button download-file">
+        <i class="icon icon-down"></i>No Watermark Video MP4
+      </a>
+      <a href="download.php?url=<?=$_SESSION['wm']?>&format=mp4" class="button download-file is-secondary mt-3">
+        With Watermark MP4
+      </a>
+      <a href="download.php?url=<?=$_SESSION['audio']?>&format=mp3" class="button is-black mt-3">Audio</a>
+    </div>
+  </div>
 </div>
-</div>
+
 
 <footer class="footer">
 <div class="container">
