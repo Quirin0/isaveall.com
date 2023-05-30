@@ -68,47 +68,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
-        }
-
-        function translatePage(language) {
-            google.translate.translatePage(language);
-        }
-
-        function translatePageToUserLanguage() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(translatePageBasedOnLocation);
-            } else {
-                console.log('Geolocation is not supported by this browser.');
-            }
-        }
-
-        function translatePageBasedOnLocation(position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            const geocoder = new google.maps.Geocoder();
-
-            geocoder.geocode({ 'location': { lat: latitude, lng: longitude } }, function (results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                    if (results[0]) {
-                        const userCountry = results[0].address_components.find(component => component.types.includes('country'));
-                        const countryCode = userCountry.short_name;
-                        const userLanguage = navigator.language || navigator.userLanguage;
-
-                        const languageCode = userLanguage.split('-')[0] || countryCode;
-
-                        translatePage(languageCode);
-                    }
-                } else {
-                    console.log('Geocoder failed due to: ' + status);
-                }
-            });
-        }
-    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-light">
