@@ -301,67 +301,14 @@ height: 225px;overflow: scroll;">
 </div>
 <div id="js-result"></div>
 </footer>
-<style>
-  .ad-sticky {
-    position: fixed;
-    bottom: -100px; /* Define a posição inicial abaixo da tela */
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background-color: #f5f5f5;
-    transition: bottom 0.5s ease-in-out; /* Adiciona uma transição suave */
-    z-index: 9999;
-  }
-
-  .ad-show {
-    bottom: 0; /* Define a posição para mostrar o elemento */
-  }
-
-  .ad-item {
-    padding: 20px;
-    text-align: center;
-  }
-
-  .ad-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-  }
-</style>
-
-<div class="ad-sticky is-mobile-only" id="ad-sticky">
-  <div class="ad-item">
-    <!-- Coloque o código do anúncio do Google aqui -->
-    <!-- Substitua o código abaixo pelo código real do anúncio -->
-    <p>Exemplo de anúncio do Google</p>
-    
-    <div class="ad-close" id="sticky-close"><svg width="22px" height="22px" viewBox="0 0 16 16" fill="#000" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
-</svg></div>
-  </div>
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var adSticky = document.getElementById("ad-sticky");
-    var adClose = document.getElementById("sticky-close");
-
-    // Mostra o elemento após um pequeno atraso
-    setTimeout(function() {
-      adSticky.classList.add("ad-show");
-    }, 1000);
-
-    // Fecha o elemento ao clicar no botão "Fechar"
-    adClose.addEventListener("click", function() {
-      adSticky.classList.remove("ad-show");
-    });
-  });
-</script>
 
 
 
 
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3869138732972987"
+     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
