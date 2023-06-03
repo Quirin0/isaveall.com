@@ -65,7 +65,7 @@ class Hub {
             try {
                 $selectedType = $response;
     
-                $format = $selectedType == $response ? '.mp3' : '.mp4';
+                $format = $selectedType == $response ? '.mp4' : '.mp3';
         
                 // Obtém o nome do arquivo
                 $fileName = "NwTik - UniversalHub Downloader" . $format;
