@@ -59,6 +59,7 @@ class Hub {
             // If account is private and you subscribed to it, first login
             $instagram = Instagram::withCredentials(new \GuzzleHttp\Client(), 'vinicius_qrn', 'teteumatheus123', new Psr16Adapter('Files'));
             $instagram->login();
+            $instagram->saveSession();
             $media = $instagram->getMediaByUrl($url);
             $response = $media->getVideoStandardResolutionUrl();
 
