@@ -102,7 +102,7 @@ gtag('config', 'G-DPX5XTJG1D');
 <h1 class="title">No Watermark TikTok Video Downloader</h1>
 <h2 class="text-center text-white title-2">Fast, Easy and for All devices.</h2>
 
-<form class="form pb-5" name="formurl" method="post" action="download/index.php">
+<form class="form pb-5" name="formurl" method="post" action="download/download.php">
   <div class="message">
     <div class="message-body"></div>
   </div>
