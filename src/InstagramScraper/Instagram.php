@@ -29,6 +29,8 @@ use Psr\Http\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
 use stdClass;
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../InstagramScraper.php';
 class Instagram
 {
     const HTTP_NOT_FOUND = 404;

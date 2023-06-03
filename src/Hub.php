@@ -57,9 +57,8 @@ class Hub {
             // If account is public you can query Instagram without auth
             $instagram = new Instagram(new \GuzzleHttp\Client());
             // If account is private and you subscribed to it, first login
-            $instagram = Instagram::withCredentials(new \GuzzleHttp\Client(), 'vinicius_qrn', 'teteumatheus123', new Psr16Adapter('Files'));
-            $instagram->login();
-            $instagram->saveSession();
+            $instagram  = Instagram::withCredentials(new \GuzzleHttp\Client(), '', '', null);
+            $instagram->loginWithSessionId('9157536476%3AUXT8DS2ksXPkWN%3A0%3AAYcrOcEZjuC0Mx-zMcgjDa_coZ3B5D-9uFh4udJ_6g');
             $media = $instagram->getMediaByUrl($url);
             $response = $media->getVideoStandardResolutionUrl();
 
