@@ -77,7 +77,39 @@ gtag('config', 'G-DPX5XTJG1D');
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+.title {
+  font-size: 3rem;
+  padding: 0.5rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  overflow: hidden;
+}
+.title span.typed-text {
+  font-weight: 700;
+  color: #c330f1 !important;
+}
+.title span.cursor {
+  display: inline-block;
+  background-color: #ccc;
+  margin-left: 0.1rem;
+  width: 3px;
+  animation: blink 1s infinite;
+}
+.title span.cursor.typing {
+  animation: none;
+}
+@keyframes blink {
+  0%  { background-color: #ccc; }
+  49% { background-color: #ccc; }
+  50% { background-color: transparent; }
+  99% { background-color: transparent; }
+  100%  { background-color: #ccc; }
+}
+  </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-light">
@@ -99,7 +131,9 @@ gtag('config', 'G-DPX5XTJG1D');
 
 <section id="hero" class="section hero">
 <div class="container w100">
-<h1 class="title">No Watermark TikTok Video Downloader</h1>
+ 
+<h1 class="title"><p>Download <span class="typed-text"></span><span class="cursor">&nbsp;</span></p></h1>
+
 <h2 class="text-center text-white title-2">Fast, Easy and for All devices.</h2>
 
 <form class="form pb-5" name="formurl" method="post" action="download/download.php">
@@ -107,7 +141,7 @@ gtag('config', 'G-DPX5XTJG1D');
     <div class="message-body"></div>
   </div>
   <div class="is-relative" style="overflow: hidden;width: 100%;">
-    <input name="url" id="url" type="text" class="link-input" value="" placeholder="Paste TikTok link here" required="" aria-label="Name" autocomplete="off" autocapitalize="none">
+    <input name="url" id="url" type="text" class="link-input" value="" placeholder="Paste TikTok or Reels Here." required="" aria-label="Name" autocomplete="off" autocapitalize="none">
     <button class="button button-paste" type="button" onclick="pasteFromClipboard()"><i class="fas fa-clipboard" style="margin-right: 5px;"></i><span>Paste</span></button>
   </div>
   <style>
@@ -303,5 +337,49 @@ gtag('config', 'G-DPX5XTJG1D');
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3869138732972987"
      crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const typedTextSpan = document.querySelector(".typed-text");
+const cursorSpan = document.querySelector(".cursor");
+
+const textArray = ["Instagram Reels", "Tiktok Without Watermark", "Anything."];
+const typingDelay = 90;
+const erasingDelay = 50;
+const newTextDelay = 700; // Delay between current and next text
+let textArrayIndex = 0;
+let charIndex = 0;
+
+function type() {
+  if (charIndex < textArray[textArrayIndex].length) {
+    if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(type, typingDelay);
+  } 
+  else {
+    cursorSpan.classList.remove("typing");
+  	setTimeout(erase, newTextDelay);
+  }
+}
+
+function erase() {
+	if (charIndex > 0) {
+    if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
+    charIndex--;
+    setTimeout(erase, erasingDelay);
+  } 
+  else {
+    cursorSpan.classList.remove("typing");
+    textArrayIndex++;
+    if(textArrayIndex>=textArray.length) textArrayIndex=0;
+    setTimeout(type, typingDelay + 1100);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+  if(textArray.length) setTimeout(type, newTextDelay + 250);
+});
+</script>
 </body>
 </html>
