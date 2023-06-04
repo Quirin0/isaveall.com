@@ -187,23 +187,25 @@ gtag('config', 'G-DPX5XTJG1D');
 <div id="download" class="download"></div>
 <div class="contents">
 <section class="container mt-1">
-<h3 class="text-center ">Download TikTok Videos Without Watermark for FREE</h3>
+<h3 class="text-center ">Download Anything for FREE</h3>
 <br>
-<p><b>NwTik.com</b> is one of the best TikTok Downloader <b>Without Watermark</b>. You are not required to install any software on your computer or mobile phone, all that you need is a TikTok video link, and all the processing is done on our side so you can be one click away from downloading videos to your devices.</p>
+<p><b>Nwtik.com</b> is one of the best Hub Downloader <b>TikTok Without Watermark, Instagram Reels, Instagram Images</b>, Anything you want you can download here. You are not required to install any software on your computer or mobile phone, all that you need is the plataform link, and all the processing is done on our side so you can be <b>one click</b> away from downloading to your devices.</p>
 <h4 class="subtitle f14 mb-3">Key features:</h4>
 <ul>
 <li>No watermark for better quality, which most of the tools out there can't.</li>
 <li>Download TikTok videos on any devices that you want: mobile, PC, or tablet. TikTok only allows users to download videos by its application and downloaded videos contain the watermark.</li>
+<li>Download Instagram Reels in the best quality.</li>
+<li>Download Instagram Images in high resolution.</li>
 <li>Download by using your browsers: I want to keep things simple for you. No need to download or install any software. I make an application for this purpose as well but you can only install whenever you like.</li>
 <li>It's always free. I only place some ads, which support maintaining our services, and further development.</li> <li>New NwTik provides users with the ability to download Tiktok's photo slide show as Mp4 Video format. The images and music in the Tiktok slide show will be automatically merged by NwTik. In addition, you can also download each image in the slide show to your computer right away.</li> </ul>
 <br>
 </section>
 <section class="container mt-1">
-  <h3 class="text-center font-weight-600">How to Use TikTok Video Downloader</h3>
+  <h3 class="text-center font-weight-600">How to Use Nwtik Video Downloader</h3>
   <div class="row text-left">
     <div class="col-md-4 mt-4 mx-0 pr-md-4">
-      <h5>Find a TikTok video link</h5>
-      <p class="text-muted">Open TikTok, find a video and copy its URL.</p>
+      <h5>Find the link of media you want</h5>
+      <p class="text-muted">Open TikTok or Instagram and find share button, copy the link and go for next step.</p>
     </div>
     <div class="col-md-4 mt-4 mx-0">
       <h5>Paste the video URL</h5>
@@ -342,7 +344,7 @@ gtag('config', 'G-DPX5XTJG1D');
 const typedTextSpan = document.querySelector(".typed-text");
 const cursorSpan = document.querySelector(".cursor");
 
-const textArray = ["Instagram Reels", "Tiktok Without Watermark", "Anything."];
+const textArray = ["Instagram Reels", "Tiktok Without Watermark", "Instagram Images", "Anything."];
 const typingDelay = 90;
 const erasingDelay = 50;
 const newTextDelay = 700; // Delay between current and next text

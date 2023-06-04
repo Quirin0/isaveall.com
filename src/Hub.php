@@ -17,6 +17,11 @@ class Hub {
         self::$url = $url;
     }
     
+    /**
+     * Método responsável por processar de qual plataforma a url se trata, e também processar se é um video ou uma imagem
+     * Logo em seguida iniciar o download (TODO: corrigir para retornar as opções de Video, imagem ou Audio, para que o usuario escolha qual quer baixar. )
+     * @param string $url
+     */
     public static function processURL($url)
     {
         if (self::isTikTokURL($url)) {
@@ -36,7 +41,7 @@ class Hub {
                 $format = $selectedType == $urls['audio'] ? '.mp3' : '.mp4';
         
                 // Obtém o nome do arquivo
-                $fileName = "NwTik - UniversalHub Downloader" . $format;
+                $fileName = "nwtik" . $format;
         
                 // Define o cabeçalho para iniciar o download
                 header('Content-Description: File Transfer');
@@ -60,42 +65,66 @@ class Hub {
             $instagram  = Instagram::withCredentials(new \GuzzleHttp\Client(), '', '', null);
             $instagram->loginWithSessionId('9157536476%3AUXT8DS2ksXPkWN%3A0%3AAYcrOcEZjuC0Mx-zMcgjDa_coZ3B5D-9uFh4udJ_6g');
 
-            // Trata a Url para remover as informações após o código do reels
-            $string = $url;
-            $pattern = "/(https:\/\/www.instagram.com\/reel\/[^\/]+).*/";
-            $replacement = "$1";
-            $url = preg_replace($pattern, $replacement, $string);
-
-            $media = $instagram->getMediaByUrl($url);
-            $response = $media->getVideoStandardResolutionUrl();
-
-            try {
-                $selectedType = $response;
-    
-                $format = $selectedType == $response ? '.mp4' : '.mp3';
-        
-                // Obtém o nome do arquivo
-                $fileName = "NwTik - UniversalHub Downloader" . $format;
-        
-                // Define o cabeçalho para iniciar o download
-                header('Content-Description: File Transfer');
-                header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename=' . $fileName);
-                header('Content-Transfer-Encoding: binary');
-                header('Expires: 0');
-                header('Cache-Control: must-revalidate');
-                header('Pragma: public');
-                header('Content-Length: ' . filesize($selectedType));
-        
-                // Faz o download do vídeo e envia como resposta
-                readfile($selectedType);
-            } catch (\Throwable $th) {
-                echo $th;
+            // Trata a Url para remover as informações após o código do reels ou imagem
+            if (preg_match('/https:\/\/www.instagram.com\/(?:reel|p)\/[^\/]+/', $url, $matches)) {
+                $url = $matches[0];
+                $media = $instagram->getMediaByUrl($url);
+                if (strpos($url, '/p/') !== false) {
+                    // Se a URL contém '/p/', executar o método getImageHighResolutionUrl()
+                    try {
+                        $url = $media->getImageHighResolutionUrl();
+                        $format = $url==$url ? '.jpg' : '.png';
+                        $account = $media->getOwner();
+                        $user = $account->getUsername();
+                        // Obtém o nome do arquivo
+                        $fileName = "{$user}-nwtik" . $format;
+                
+                        // Define o cabeçalho para iniciar o download
+                        header('Content-Description: File Transfer');
+                        header('Content-Type: application/octet-stream');
+                        header('Content-Disposition: attachment; filename=' . $fileName);
+                        header('Content-Transfer-Encoding: binary');
+                        header('Expires: 0');
+                        header('Cache-Control: must-revalidate');
+                        header('Pragma: public');
+                        header('Content-Length: ' . filesize($url));
+                
+                        // Faz o download do vídeo e envia como resposta
+                        readfile($url);
+                    } catch (\Throwable $th) {
+                        echo $th;
+                    }
+                } elseif (strpos($url, '/reel/') !== false) {
+                    // Se a URL contém '/reel/', executar o método getVideoStandardResolutionUrl()
+                    try {
+                        $url = $media->getVideoStandardResolutionUrl();
+                        $format = $url==$url ? '.mp4' : '.mp3';
+                        $account = $media->getOwner();
+                        $user = $account->getUsername();
+                        // Obtém o nome do arquivo
+                        $fileName = "{$user}-nwtik" . $format;
+                
+                        // Define o cabeçalho para iniciar o download
+                        header('Content-Description: File Transfer');
+                        header('Content-Type: application/octet-stream');
+                        header('Content-Disposition: attachment; filename=' . $fileName);
+                        header('Content-Transfer-Encoding: binary');
+                        header('Expires: 0');
+                        header('Cache-Control: must-revalidate');
+                        header('Pragma: public');
+                        header('Content-Length: ' . filesize($url));
+                
+                        // Faz o download do vídeo e envia como resposta
+                        readfile($url);
+                    } catch (\Throwable $th) {
+                        echo $th;
+                    }
+                }
             }
         } else {
             // URL inválida ou de outra plataforma
-            echo "alert('URL inválida ou de outra plataforma.')";
-            // header('Location: /');
+            echo "<script>alert('URL inválida ou de outra plataforma.')</script>";
+            header('Location: /');
         }
     }
 

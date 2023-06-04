@@ -12,9 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['url'])) {
         // Obter a URL do campo 'url'
         $url = $_POST['url'];
-
         // Verificar de qual plataforma é a URL
         Hub::processURL($url);        
-
     }
 }
