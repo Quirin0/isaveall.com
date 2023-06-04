@@ -61,7 +61,7 @@ class Hub {
             $instagram->loginWithSessionId('9157536476%3AUXT8DS2ksXPkWN%3A0%3AAYcrOcEZjuC0Mx-zMcgjDa_coZ3B5D-9uFh4udJ_6g');
 
             // Trata a Url para remover as informações após o código do reels
-            $string = "https://www.instagram.com/reel/Cq-qxglIsCC/123456789";
+            $string = $url;
             $pattern = "/(https:\/\/www.instagram.com\/reel\/[^\/]+).*/";
             $replacement = "$1";
             $url = preg_replace($pattern, $replacement, $string);
