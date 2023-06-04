@@ -59,6 +59,17 @@ class Hub {
             // If account is private and you subscribed to it, first login
             $instagram  = Instagram::withCredentials(new \GuzzleHttp\Client(), '', '', null);
             $instagram->loginWithSessionId('9157536476%3AUXT8DS2ksXPkWN%3A0%3AAYcrOcEZjuC0Mx-zMcgjDa_coZ3B5D-9uFh4udJ_6g');
+            $string = "https://www.instagram.com/reel/Cq-qxglIsCC/123456789";
+
+            $pattern = "/(https:\/\/www.instagram.com\/reel\/[^\/]+).*/";
+
+            $replacement = "$1";
+
+            $url = preg_replace($pattern, $replacement, $string);
+
+            echo '<pre>';
+            print_r($url);
+            echo '</pre>';exit;
             $media = $instagram->getMediaByUrl($url);
             $response = $media->getVideoStandardResolutionUrl();
 
