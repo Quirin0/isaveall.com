@@ -38,17 +38,6 @@ class Hub {
         return json_decode($tmpStr)->text;
     }
 
-    public static function getSDLink($curl_content)
-    {
-        $regexRateLimit = '/playable_url":"([^"]+)"/';
-
-        if (preg_match($regexRateLimit, $curl_content, $match)) {
-            return self::cleanStr($match[1]);
-        } else {
-            return false;
-        }
-    }
-
     public static function getHDLink($curl_content)
     {
         $regexRateLimit = '/playable_url_quality_hd":"([^"]+)"/';
@@ -229,10 +218,6 @@ class Hub {
 
                 $msg['id'] = self::generateId($url);
                 $msg['title'] = self::getTitle($data);
-
-                if ($sdLink = self::getSDLink($data)) {
-                    $msg['links']['Download Low Quality'] = $sdLink . '.mp4';
-                }
 
                 if ($hdLink = self::getHDLink($data)) {
                     $msg['links']['Video High Quality'] = $hdLink . '.mp4';
