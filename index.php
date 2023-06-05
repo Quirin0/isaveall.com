@@ -413,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
     
     links !== undefined && Object.keys(links).forEach(function (key) {
       const format = links[key].substring(links[key].length - 4);
-      $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="download/?down=${links[key]}&dl=1" download="nwtik-hubdownloader${format}">${key}</a>`)
+      $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="download/index.php?down=${links[key]}&dl=1" download="nwtik-hubdownloader${format}">${key}</a>`)
     })
     
   } else {
