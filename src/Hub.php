@@ -8,6 +8,8 @@ use DOMDocument;
 use DOMXPath;
 use Phpfastcache\Helper\Psr16Adapter;
 use InstagramScraper\Instagram;
+use Exception;
+use Symfony\Component\HttpClient\HttpClient;
 
 class Hub {
 
@@ -15,6 +17,104 @@ class Hub {
 
     public static function setUrl($url) {
         self::$url = $url;
+    }
+    
+    public static function generateId($url)
+    {
+        $id = '';
+        if (is_int($url)) {
+            $id = $url;
+        } elseif (preg_match('#(\d+)/?$#', $url, $matches)) {
+            $id = $matches[1];
+        }
+
+        return $id;
+    }
+
+    public static function cleanStr($str)
+    {
+        $tmpStr = "{\"text\": \"{$str}\"}";
+
+        return json_decode($tmpStr)->text;
+    }
+
+    public static function getSDLink($curl_content)
+    {
+        $regexRateLimit = '/playable_url":"([^"]+)"/';
+
+        if (preg_match($regexRateLimit, $curl_content, $match)) {
+            return self::cleanStr($match[1]);
+        } else {
+            return false;
+        }
+    }
+
+    public static function getHDLink($curl_content)
+    {
+        $regexRateLimit = '/playable_url_quality_hd":"([^"]+)"/';
+
+        if (preg_match($regexRateLimit, $curl_content, $match)) {
+            return self::cleanStr($match[1]);
+        } else {
+            return false;
+        }
+    }
+
+    public static function getTitle($curl_content)
+    {
+        $title = null;
+        if (preg_match('/<title>(.*?)<\/title>/', $curl_content, $matches)) {
+            $title = $matches[1];
+        } elseif (preg_match('/title id="pageTitle">(.+?)<\/title>/', $curl_content, $matches)) {
+            $title = $matches[1];
+        }
+
+        return self::cleanStr($title);
+    }
+
+    public static function getDescription($curl_content)
+    {
+        if (preg_match('/span class="hasCaption">(.+?)<\/span>/', $curl_content, $matches)) {
+            return self::cleanStr($matches[1]);
+        }
+
+        return false;
+    }    
+
+    public static function isTikTokURL($url)
+    {
+        // Implemente a lógica para verificar se a URL é do TikTok
+        $parsedUrl = parse_url($url);
+        if ($parsedUrl === false || !isset($parsedUrl['host'])) {
+            return false;
+        }
+
+        $host = strtolower($parsedUrl['host']);
+        return strpos($host, 'tiktok.com') !== false || strpos($host, 'tiktok.com') !== false;
+    }
+
+    public static function isInstagramURL($url)
+    {
+        // Implemente a lógica para verificar se a URL é do Instagram
+        $parsedUrl = parse_url($url);
+        if ($parsedUrl === false || !isset($parsedUrl['host'])) {
+            return false;
+        }
+
+        $host = strtolower($parsedUrl['host']);
+        return strpos($host, 'instagram.com') !== false || strpos($host, 'instagr.am') !== false;
+    }
+
+    public static function isFacebookURL($url)
+    {
+        // Implemente a lógica para verificar se a URL é do Facebook
+        $parsedUrl = parse_url($url);
+        if ($parsedUrl === false || !isset($parsedUrl['host'])) {
+            return false;
+        }
+
+        $host = strtolower($parsedUrl['host']);
+        return strpos($host, 'facebook.com') !== false || strpos($host, 'm.facebook.com') !== false;
     }
     
     /**
@@ -27,40 +127,27 @@ class Hub {
         if (self::isTikTokURL($url)) {
             self::setUrl($url);
             $response = self::tiktokdownload($url);
-            
+            $msg = [];
             $response->then(function ($resultado) {
                 // Capturar os valores de "nowm", "wm" e "audio" em um array
                 $urls = [
-                    'nowm' => $resultado['nowm'],
-                    'wm' => $resultado['wm'],
-                    'audio' => $resultado['audio']
+                    'No Watermark'   => $resultado['nowm'] . '.mp4',
+                    'With Watermark' => $resultado['wm']   . '.mp4',
+                    'Audio'          => $resultado['nowm'] . '.mp3'
                 ];
-                //TODO: Corrigir a variavel $selectedType para o tipo que o usuario escolher
-                $selectedType = $urls['nowm'];
-    
-                $format = $selectedType == $urls['audio'] ? '.mp3' : '.mp4';
-        
-                // Obtém o nome do arquivo
-                $fileName = "nwtik" . $format;
-        
-                // Define o cabeçalho para iniciar o download
-                header('Content-Description: File Transfer');
-                header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename=' . $fileName);
-                header('Content-Transfer-Encoding: binary');
-                header('Expires: 0');
-                header('Cache-Control: must-revalidate');
-                header('Pragma: public');
-                header('Content-Length: ' . filesize($selectedType));
-        
-                // Faz o download do vídeo e envia como resposta
-                readfile($selectedType);
+                
+                $msg['success'] = true;
+                
+                $msg['id'] = "111";
+                $msg['title'] = "Tiktok";
+                $msg['links'] = $urls;
+                echo json_encode($msg);
                 
             })->done();
 
+
         } elseif (self::isInstagramURL($url)) {
-            // If account is public you can query Instagram without auth
-            $instagram = new Instagram(new \GuzzleHttp\Client());
+            $msg = [];
             // If account is private and you subscribed to it, first login
             $instagram  = Instagram::withCredentials(new \GuzzleHttp\Client(), '', '', null);
             $instagram->loginWithSessionId('9157536476%3AUXT8DS2ksXPkWN%3A0%3AAYcrOcEZjuC0Mx-zMcgjDa_coZ3B5D-9uFh4udJ_6g');
@@ -72,85 +159,100 @@ class Hub {
                 if (strpos($url, '/p/') !== false) {
                     // Se a URL contém '/p/', executar o método getImageHighResolutionUrl()
                     try {
-                        $url = $media->getImageHighResolutionUrl();
-                        $format = $url==$url ? '.jpg' : '.png';
-                        $account = $media->getOwner();
-                        $user = $account->getUsername();
-                        // Obtém o nome do arquivo
-                        $fileName = "{$user}-nwtik" . $format;
-                
-                        // Define o cabeçalho para iniciar o download
-                        header('Content-Description: File Transfer');
-                        header('Content-Type: application/octet-stream');
-                        header('Content-Disposition: attachment; filename=' . $fileName);
-                        header('Content-Transfer-Encoding: binary');
-                        header('Expires: 0');
-                        header('Cache-Control: must-revalidate');
-                        header('Pragma: public');
-                        header('Content-Length: ' . filesize($url));
-                
-                        // Faz o download do vídeo e envia como resposta
-                        readfile($url);
+                        $highRes = $media->getImageHighResolutionUrl();
+                        $lowRes  = $media->getImageStandardResolutionUrl();
+                        $urls  = [
+                            'Full HD Image'        => $highRes,
+                            'Low Resolution Image' => $lowRes 
+                        ];
+                        $msg['success'] = true;
+                        $msg['id']      = "222";
+                        $msg['title']   = 'Instagram';
+                        $msg['links']   = $urls;
+                        echo json_encode($msg);
                     } catch (\Throwable $th) {
                         echo $th;
                     }
                 } elseif (strpos($url, '/reel/') !== false) {
                     // Se a URL contém '/reel/', executar o método getVideoStandardResolutionUrl()
                     try {
-                        $url = $media->getVideoStandardResolutionUrl();
-                        $format = $url==$url ? '.mp4' : '.mp3';
-                        $account = $media->getOwner();
-                        $user = $account->getUsername();
-                        // Obtém o nome do arquivo
-                        $fileName = "{$user}-nwtik" . $format;
-                
-                        // Define o cabeçalho para iniciar o download
-                        header('Content-Description: File Transfer');
-                        header('Content-Type: application/octet-stream');
-                        header('Content-Disposition: attachment; filename=' . $fileName);
-                        header('Content-Transfer-Encoding: binary');
-                        header('Expires: 0');
-                        header('Cache-Control: must-revalidate');
-                        header('Pragma: public');
-                        header('Content-Length: ' . filesize($url));
-                
-                        // Faz o download do vídeo e envia como resposta
-                        readfile($url);
+                        $highRes = $media->getVideoStandardResolutionUrl();
+                        $lowRes  = $media->getVideoLowResolutionUrl();
+                        $urls = [
+                            'Full HD Video' => $highRes . '.mp4',
+                            'Hd Video'      => $lowRes  . '.mp4',
+                            'Audio HD'      => $highRes . '.mp3',
+                            'Audio SD'      => $lowRes  . '.mp3',
+                        ];
+                        $msg['success'] = true;
+                        $msg['id']      = "333";
+                        $msg['title']   = 'Instagram';
+                        $msg['links']   = $urls;
+                        echo json_encode($msg);
                     } catch (\Throwable $th) {
                         echo $th;
                     }
                 }
             }
-        } else {
-            // URL inválida ou de outra plataforma
-            echo "<script>alert('URL inválida ou de outra plataforma.')</script>";
-            header('Location: /');
+        } elseif(self::isFacebookURL($url)) {
+            self::setUrl($url);
+            try {
+                header('Content-Type: application/json');
+    
+                $msg = [];
+                $headers = [
+                    'sec-fetch-user'            => '?1',
+                    'sec-ch-ua-mobile'          => '?0',
+                    'sec-fetch-site'            => 'none',
+                    'sec-fetch-dest'            => 'document',
+                    'sec-fetch-mode'            => 'navigate',
+                    'cache-control'             => 'max-age=0',
+                    'authority'                 => 'www.facebook.com',
+                    'upgrade-insecure-requests' => '1',
+                    'accept-language'           => 'en-GB,en;q=0.9,tr-TR;q=0.8,tr;q=0.7,en-US;q=0.6',
+                    'sec-ch-ua'                 => '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
+                    'user-agent'                => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36',
+                    'accept'                    => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'cookie'                    => 'sb=Rn8BYQvCEb2fpMQZjsd6L382; datr=Rn8BYbyhXgw9RlOvmsosmVNT; c_user=100003164630629; _fbp=fb.1.1629876126997.444699739; wd=1920x939; spin=r.1004812505_b.trunk_t.1638730393_s.1_v.2_; xs=28%3A8ROnP0aeVF8XcQ%3A2%3A1627488145%3A-1%3A4916%3A%3AAcWIuSjPy2mlTPuZAeA2wWzHzEDuumXI89jH8a_QIV8; fr=0jQw7hcrFdas2ZeyT.AWVpRNl_4noCEs_hb8kaZahs-jA.BhrQqa.3E.AAA.0.0.BhrQqa.AWUu879ZtCw',
+                ];
+
+
+                $client = HttpClient::create([
+                    'headers' => $headers,
+                ]);
+
+                $response = $client->request('GET', $url);
+
+                $data = $response->getContent();
+
+                $msg['success'] = true;
+
+                $msg['id'] = self::generateId($url);
+                $msg['title'] = self::getTitle($data);
+
+                if ($sdLink = self::getSDLink($data)) {
+                    $msg['links']['Download Low Quality'] = $sdLink . '.mp4';
+                }
+
+                if ($hdLink = self::getHDLink($data)) {
+                    $msg['links']['Video High Quality'] = $hdLink . '.mp4';
+                    $msg['links']['Audio High Quality'] = $hdLink . '.mp3';
+                }
+                } catch (Exception $e) {
+                    $msg['success'] = false;
+                    $msg['message'] = $e->getMessage();
+                }
+
+                echo json_encode($msg);
+
+        }
+        else{
+            $msg['success'] = false;
+            $msg['message'] = "No video or image found. Try again";
+            echo json_encode($msg);
         }
     }
-
-    private static function isTikTokURL($url)
-    {
-        // Implemente a lógica para verificar se a URL é do TikTok
-        $parsedUrl = parse_url($url);
-        if ($parsedUrl === false || !isset($parsedUrl['host'])) {
-            return false;
-        }
-
-        $host = strtolower($parsedUrl['host']);
-        return strpos($host, 'tiktok.com') !== false || strpos($host, 'tiktok.com') !== false;
-    }
-
-    private static function isInstagramURL($url)
-    {
-        // Implemente a lógica para verificar se a URL é do Instagram
-        $parsedUrl = parse_url($url);
-        if ($parsedUrl === false || !isset($parsedUrl['host'])) {
-            return false;
-        }
-
-        $host = strtolower($parsedUrl['host']);
-        return strpos($host, 'instagram.com') !== false || strpos($host, 'instagr.am') !== false;
-    }
+    
 
     /**
      * Método responsável por baixar um video do TikTok

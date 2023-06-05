@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,53 +16,33 @@ gtag('config', 'G-DPX5XTJG1D');
 <!-- SEO -->
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>Tiktok Downloader - Download Video TikTok Without Watermark - NwTik</title>
-<meta name="robots" content="index, follow" />
-<meta name="revisit-after" content="1 days" />
 <meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no' />
 <meta name="color-scheme" content="dark light">
-<meta itemprop="name" content="Tiktok Downloader - Download Video TikTok Without Watermark - NwTik">
-<meta name="description" content="TikTok Video Downloader - NwTik.com is one of the best free Download video Tiktok No Watermark tool available online. You can download TikTok video from any device you have.">
-<meta name="author" content="Admin" />
-<meta itemprop="image" content="https://NwTik.com/assets/img/snapthumb.jpg">
+<meta name="title" content="Nwtik - Hub Downloader">
+<meta name="description" content="Nwtik Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
+<meta name="keywords" content="nwtik, tiktok without watermark, tiktok download mp4, instagram reels download, insta download reels, reels download, insta download">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="language" content="English">
+<meta name="revisit-after" content="1 days">
+<meta name="author" content="Matheus Quirino">
 <meta name="google" content="translate" />
 <!-- TWITTER -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tiktok Downloader - Download Video tiktok Without Watermark - NwTik">
-<meta name="twitter:description" content="TikTok Video Downloader - NwTik.com is one of the best free Download video Tiktok No Watermark tool available online. You can download TikTok video from any device you have.">
+<meta name="twitter:title" content="Nwtik - Hub Downloader">
+<meta name="twitter:description" content="Nwtik Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
 <meta name="twitter:image:src" content="https://NwTik.com/assets/img/snapthumb.jpg">
-<meta name="twitter:site" content="NwTik.com">
+<meta name="twitter:site" content="nwtik.com">
 <!-- OG -->
 <meta property="og:locale" content="en" /> <meta name="msvalidate.01" content="1E856EC97F6E089FF79520F154CCFD0F" />
-<meta property="og:title" content="Tiktok Downloader - Download Video tiktok Without Watermark - NwTik">
+<meta property="og:title" content="Nwtik - Hub Downloader">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://NwTik.com/assets/img/snapthumb.jpg">
-<meta property="og:description" content="TikTok Video Downloader - NwTik.com is one of the best free Download video Tiktok No Watermark tool available online. You can download TikTok video from any device you have.">
+<meta property="og:description" content="Nwtik Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
 <meta property="og:site_name" content="NwTik.com">
 <link rel="apple-touch-icon" sizes="192x192" href="https://NwTik.com/img/icons-192.png">
 <link rel="shortcut icon" href="https://NwTik.com/assets/img/favicon.png" />
 <link rel="alternate" hreflang="x-default" href="https://NwTik.com/" />
-<link rel="alternate" hreflang="en" href="https://NwTik.com/" />
-<link rel="alternate" hreflang="en-in" href="https://NwTik.com/in">
-<link rel="alternate" hreflang="vi" href="https://NwTik.com/vn" />
-<link rel="alternate" hreflang="tr" href="https://NwTik.com/tr" />
-<link rel="alternate" hreflang="id-ID" href="https://NwTik.com/ID" />
-<link rel="alternate" hreflang="fr" href="https://NwTik.com/fr" />
-<link rel="alternate" hreflang="pt" href="https://NwTik.com/pt" />
-<link rel="alternate" hreflang="ru" href="https://NwTik.com/ru" />
-<link rel="alternate" hreflang="es" href="https://NwTik.com/es" />
-<link rel="alternate" hreflang="ms" href="https://NwTik.com/ms" />
-<link rel="alternate" hreflang="ko" href="https://NwTik.com/ko" />
-<link rel="alternate" hreflang="ja" href="https://NwTik.com/ja" />
-<link rel="alternate" hreflang="jv" href="https://NwTik.com/jv" />
-<link rel="alternate" hreflang="cs" href="https://NwTik.com/cs" />
-<link rel="alternate" hreflang="de" href="https://NwTik.com/de" />
-<link rel="alternate" hreflang="it" href="https://NwTik.com/it" />
-<link rel="alternate" hreflang="pl" href="https://NwTik.com/pl" />
-<link rel="alternate" hreflang="hu" href="https://NwTik.com/hu" />
-<link rel="alternate" hreflang="nl" href="https://NwTik.com/nl" />
-<link rel="alternate" hreflang="ro" href="https://NwTik.com/ro" />
-<link rel="alternate" hreflang="el" href="https://NwTik.com/el" />
 <link rel="canonical" href="https://NwTik.com/" />
 <link rel="preconnect" href="//www.google-analytics.com" crossorigin>
 <link rel="dns-prefetch" href="//www.google-analytics.com">
@@ -78,7 +60,7 @@ gtag('config', 'G-DPX5XTJG1D');
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .title {
   font-size: 3rem;
@@ -136,12 +118,12 @@ gtag('config', 'G-DPX5XTJG1D');
 
 <h2 class="text-center text-white title-2">Fast, Easy and for All devices.</h2>
 
-<form class="form pb-5" name="formurl" method="post" action="download/download.php">
+<form class="form pb-2" name="formurl" method="post" action="download/download.php">
   <div class="message">
     <div class="message-body"></div>
   </div>
   <div class="is-relative" style="overflow: hidden;width: 100%;">
-    <input name="url" id="url" type="text" class="link-input" value="" placeholder="Paste TikTok or Reels Here." required="" aria-label="Name" autocomplete="off" autocapitalize="none">
+    <input name="url" id="link" type="text" class="link-input" value="" placeholder="Paste TikTok or Reels Here." required="" aria-label="Name" autocomplete="off" autocapitalize="none">
     <button class="button button-paste" type="button" onclick="pasteFromClipboard()"><i class="fas fa-clipboard" style="margin-right: 5px;"></i><span>Paste</span></button>
   </div>
   <style>
@@ -161,11 +143,23 @@ gtag('config', 'G-DPX5XTJG1D');
   animation: pulse 1.5s infinite;
 }
   </style>
-    <button download="tiktok-downloader-Quirinox" type="submit" aria-label="Get" class="button button-go is-link pulse-animation">
-        <i class="fas fa-cloud-download-alt"></i> Download
-    </button>
-  <div class="get-loader flex-center"><span class="NwTik-loader"></span></div>
+  <!-- <i class='fas fa-cloud-download-alt'></i> -->
+  <input type="button" name="download" id="download" value="Download" class="button button-go is-link pulse-animation" onclick="getDownloadLink();">
+    
 </form>
+<div class="mt-3" id="result" style="display: none;">
+    <div id="downloadUrl">
+        <div class="row">
+            <div class="col-md-12 mt-1">
+                <div class="d-flex text-white" style="border-radius: 0.375rem;margin-bottom: 1rem;font-weight:700;"><div id="title"></div>&nbsp;Download:</div>
+                <div class="d-flex align-items-center justify-content-center ">
+                    <div id="links" class="video-links" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
   function pasteFromClipboard() {
@@ -334,7 +328,10 @@ gtag('config', 'G-DPX5XTJG1D');
 
 
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3869138732972987"
      crossorigin="anonymous"></script>
@@ -344,7 +341,7 @@ gtag('config', 'G-DPX5XTJG1D');
 const typedTextSpan = document.querySelector(".typed-text");
 const cursorSpan = document.querySelector(".cursor");
 
-const textArray = ["Instagram Reels", "Tiktok Without Watermark", "Instagram Images", "Anything."];
+const textArray = ["Instagram Reels", "Tiktok Videos", "Instagram Images", "Facebook Reels","Anything."];
 const typingDelay = 90;
 const erasingDelay = 50;
 const newTextDelay = 700; // Delay between current and next text
@@ -383,5 +380,53 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
   if(textArray.length) setTimeout(type, newTextDelay + 250);
 });
 </script>
+
+   
+<script>
+  const getDownloadLink = async () => {
+  $('#result').hide()
+
+  const vid_url = $('#link').val()
+
+  $('#download').val('Loading ...')
+  $('#download').attr('disabled', 'disabled')
+
+  $('#bar').show()
+
+  const formData = new FormData()
+  formData.append('url', vid_url)
+  const response = await fetch('download/index.php', {
+    method: 'POST',
+    body: formData
+  })
+
+  const res = await response.json()
+  if (res.success) {
+    $('#bar').hide()
+    $('#result').show()
+
+    $('#title').html(res.title)
+
+    $('#links').html('')
+
+    const links = res.links
+    
+    links !== undefined && Object.keys(links).forEach(function (key) {
+      const format = links[key].substring(links[key].length - 4);
+      $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="download/?down=${links[key]}&dl=1" download="nwtik-hubdownloader${format}">${key}</a>`)
+    })
+    
+  } else {
+    $('#bar').hide()
+    alert(res.message)
+  }
+
+  $('#download').val('Download')
+  $('#download').removeAttr('disabled')
+}
+
+
+</script>
+
 </body>
 </html>
