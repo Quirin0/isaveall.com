@@ -161,13 +161,7 @@ gtag('config', 'G-DPX5XTJG1D');
     </div>
 </div>
 
-<script>
-  function pasteFromClipboard() {
-    navigator.clipboard.readText().then(function (text) {
-      document.getElementById("url").value = text;
-    });
-  }
-</script>
+
 
 
 </div>
@@ -326,7 +320,15 @@ gtag('config', 'G-DPX5XTJG1D');
 </footer>
 
 
-
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function pasteFromClipboard() {
+      navigator.clipboard.readText().then(function (text) {
+        document.getElementById("link").value = text;
+      });
+    }
+  });
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -427,6 +429,7 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
 
 
 </script>
+
 
 </body>
 </html>
