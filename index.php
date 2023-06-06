@@ -94,6 +94,7 @@ gtag('config', 'G-DPX5XTJG1D');
   </style>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
   <a href="https://NwTik.com/" class="navbar-brand fs24 fw700 align-items-center" title="TikTok Downloader" style="color:#4B2570; font-size:28px">Nw<span style="color:black;">Tik</span></a>
@@ -118,7 +119,7 @@ gtag('config', 'G-DPX5XTJG1D');
 
 <h2 class="text-center text-white title-2">Fast, Easy and for All devices.</h2>
 
-<form class="form pb-2" name="formurl" method="post" action="download/download.php">
+<form class="form pb-2" name="formurl" method="post" action="">
   <div class="message">
     <div class="message-body"></div>
   </div>
@@ -319,16 +320,14 @@ gtag('config', 'G-DPX5XTJG1D');
 <div id="js-result"></div>
 </footer>
 
-
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
     function pasteFromClipboard() {
       navigator.clipboard.readText().then(function (text) {
         document.getElementById("link").value = text;
       });
     }
-  });
 </script>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -397,7 +396,7 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
 
   const formData = new FormData()
   formData.append('url', vid_url)
-  const response = await fetch('download/index.php', {
+  const response = await fetch('dl/index.php', {
     method: 'POST',
     body: formData
   })
@@ -415,7 +414,12 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
     
     links !== undefined && Object.keys(links).forEach(function (key) {
       const format = links[key].substring(links[key].length - 4);
-      $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="${links[key]}" download="nwtik-hubdownloader${format}">${key}</a>`)
+      if(key=='Facebook'){
+        $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="${links[key]}" download="nwtik-hubdownloader${format}" rel="nofollow">${key}</a>`);
+      }
+      else{
+        $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="dl/index.php?down=${links[key]}&format=${format}" rel="nofollow">${key}</a>`);
+      }
     })
     
   } else {
