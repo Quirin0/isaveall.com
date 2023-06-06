@@ -108,7 +108,7 @@ class Hub {
     
     /**
      * Método responsável por processar de qual plataforma a url se trata, e também processar se é um video ou uma imagem
-     * Logo em seguida iniciar o download (TODO: corrigir para retornar as opções de Video, imagem ou Audio, para que o usuario escolha qual quer baixar. )
+     * Logo em seguida iniciar o download (TODO: corrigir para retornar opcao de baixar Audio )
      * @param string $url
      */
     public static function processURL($url)
@@ -121,8 +121,7 @@ class Hub {
                 // Capturar os valores de "nowm", "wm" e "audio" em um array
                 $urls = [
                     'No Watermark'   => $resultado['nowm'] . '.mp4',
-                    'With Watermark' => $resultado['wm']   . '.mp4',
-                    'Audio'          => $resultado['nowm'] . '.mp3'
+                    'With Watermark' => $resultado['wm']   . '.mp4'
                 ];
                 
                 $msg['success'] = true;
@@ -139,7 +138,7 @@ class Hub {
             $msg = [];
             // If account is private and you subscribed to it, first login
             $instagram  = Instagram::withCredentials(new \GuzzleHttp\Client(), '', '', null);
-            $instagram->loginWithSessionId('9157536476%3AUXT8DS2ksXPkWN%3A0%3AAYcrOcEZjuC0Mx-zMcgjDa_coZ3B5D-9uFh4udJ_6g');
+            $instagram->loginWithSessionId('9157536476%3A6jhMdphPIC8MvF%3A25%3AAYcPTeKGfK5R96s6YL-xe5ULkIT5nIQf19c-EHUMyQ');
 
             // Trata a Url para remover as informações após o código do reels ou imagem
             if (preg_match('/https:\/\/www.instagram.com\/(?:reel|p)\/[^\/]+/', $url, $matches)) {
@@ -169,9 +168,7 @@ class Hub {
                         $lowRes  = $media->getVideoLowResolutionUrl();
                         $urls = [
                             'Full HD Video' => $highRes . '.mp4',
-                            'Hd Video'      => $lowRes  . '.mp4',
-                            'Audio HD'      => $highRes . '.mp3',
-                            'Audio SD'      => $lowRes  . '.mp3',
+                            'Hd Video'      => $lowRes  . '.mp4'
                         ];
                         $msg['success'] = true;
                         $msg['id']      = "333";
@@ -221,7 +218,6 @@ class Hub {
 
                 if ($hdLink = self::getHDLink($data)) {
                     $msg['links']['Video High Quality'] = $hdLink . '.mp4';
-                    $msg['links']['Audio High Quality'] = $hdLink . '.mp3';
                 }
                 } catch (Exception $e) {
                     $msg['success'] = false;

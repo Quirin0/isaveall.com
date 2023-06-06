@@ -25,7 +25,7 @@ gtag('config', 'G-DPX5XTJG1D');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="language" content="English">
 <meta name="revisit-after" content="1 days">
-<meta name="author" content="Matheus Quirino">
+<meta name="author" content="Admin">
 <meta name="google" content="translate" />
 <!-- TWITTER -->
 <meta name="twitter:card" content="summary">
@@ -413,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
     
     links !== undefined && Object.keys(links).forEach(function (key) {
       const format = links[key].substring(links[key].length - 4);
-      $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="${links[key]}&dl=1" download="nwtik-hubdownloader${format}">${key}</a>`)
+      $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="${links[key]}" download="nwtik-hubdownloader${format}">${key}</a>`)
     })
     
   } else {
