@@ -5,12 +5,12 @@ Options +FollowSymLinks
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-<ifmodule mod_security.c>
+<IfModule mod_security.c>
 
     SecFilterEngine Off
     SecFilterScanPOST Off
     
-</ifmodule>
+</IfModule>
     
 <IfModule mod_rewrite.c>
 RewriteEngine On
