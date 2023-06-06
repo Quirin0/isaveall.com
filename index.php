@@ -414,8 +414,9 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
     
     links !== undefined && Object.keys(links).forEach(function (key) {
       const format = links[key].substring(links[key].length - 4);
-      if(key=='Facebook'){
-        $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="${links[key]}" download="nwtik-hubdownloader${format}" rel="nofollow">${key}</a>`);
+      const urlPura = links[key].slice(0, -4);
+      if(res.title=='Facebook'){
+        $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="${urlPura}" download="nwtik-hubdownloader${format}" rel="nofollow">${key}</a>`);
       }
       else{
         $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="dl/index.php?down=${links[key]}&format=${format}" rel="nofollow">${key}</a>`);

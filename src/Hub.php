@@ -217,7 +217,7 @@ class Hub {
                 $msg['title'] = self::getTitle($data);
 
                 if ($hdLink = self::getHDLink($data)) {
-                    $msg['links']['Video High Quality'] = $hdLink . '.mp4';
+                    $msg['links']['Video High Quality'] = $hdLink . '&dl=1.mp4';
                 }
                 } catch (Exception $e) {
                     $msg['success'] = false;
