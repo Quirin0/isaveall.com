@@ -419,7 +419,7 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
         $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="${urlPura}" download="nwtik-hubdownloader${format}" rel="nofollow">${key}</a>`);
       }
       else{
-        $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="dl/index.php?down=${links[key]}&format=${format}" rel="nofollow">${key}</a>`);
+        $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="dl/index.php?down=${urlPura}&format=${format}" rel="nofollow">${key}</a>`);
       }
     })
     
