@@ -382,58 +382,112 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
 });
 </script>
 
-   
 <script>
-  const getDownloadLink = async () => {
-  $('#result').hide()
+$(document).ready(function() {
+  function download(link, format) {
+    var formData = {
+      link: link,
+      format: format
+    };
 
-  const vid_url = $('#link').val()
-
-  $('#download').val('Loading ...')
-  $('#download').attr('disabled', 'disabled')
-
-  $('#bar').show()
-
-  const formData = new FormData()
-  formData.append('url', vid_url)
-  const response = await fetch('dl/index.php', {
-    method: 'POST',
-    body: formData
-  })
-
-  const res = await response.json()
-  if (res.success) {
-    $('#bar').hide()
-    $('#result').show()
-
-    $('#title').html(res.title)
-
-    $('#links').html('')
-
-    const links = res.links
-    
-    links !== undefined && Object.keys(links).forEach(function (key) {
-      const format = links[key].substring(links[key].length - 4);
-      const urlPura = links[key].slice(0, -4);
-      if(res.title=='Facebook'){
-        $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="${urlPura}" download="nwtik-hubdownloader${format}" rel="nofollow">${key}</a>`);
+    $.ajax({
+      type: "POST",
+      url: "dl/index.php",
+      data: formData,
+      success: function(response) {
+        console.log(response);
+        
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+        // Faça algo para lidar com o erro
       }
-      else{
-        $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="dl/index.php?down=${urlPura}&format=${format}" rel="nofollow">${key}</a>`);
-      }
-    })
-    
-  } else {
-    $('#bar').hide()
-    alert(res.message)
+    });
   }
 
-  $('#download').val('Download')
-  $('#download').removeAttr('disabled')
-}
+  const getDownloadLink = async () => {
+    const vid_url = $('#link').val();
 
+    if (!vid_url) {
+      alert('Por favor, insira um link válido.');
+      return;
+    }
 
+    $('#download').val('Carregando...');
+    $('#download').attr('disabled', 'disabled');
+
+    try {
+      const formData = new FormData();
+      formData.append('url', vid_url);
+
+      const response = await fetch('dl/index.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao obter o link de download.');
+      }
+
+      const res = await response.json();
+
+      if (res.success) {
+        $('#result').show();
+        $('#title').text(res.title);
+
+        const linksContainer = $('#links');
+        linksContainer.empty();
+
+        const links = res.links;
+
+        if (links && Object.keys(links).length > 0) {
+          $.each(links, function(key, value) {
+            const format = value.substring(value.length - 4);
+            const urlPura = value.slice(0, -4);
+
+            let downloadLink = $('<a>', {
+              class: 'button download-file w-100 mb-3',
+              name: 'down',
+              href: urlPura,
+              download: `nwtik-hubdownloader${format}`,
+              rel: 'nofollow',
+              text: key
+            });
+
+            if (res.title === 'Facebook') {
+              downloadLink.attr('href', urlPura);
+              downloadLink.attr('download', `nwtik-hubdownloader${format}`);
+            } else {
+              downloadLink.click(function(e) {
+                e.preventDefault();
+                download(urlPura, format);
+              });
+            }
+
+            linksContainer.append(downloadLink);
+          });
+        } else {
+          throw new Error('Nenhum link de download encontrado.');
+        }
+      } else {
+        throw new Error(res.message);
+      }
+    } catch (error) {
+      console.log(error);
+      alert('Ocorreu um erro ao obter o link de download. Por favor, tente novamente mais tarde.');
+    } finally {
+      $('#download').val('Download');
+      $('#download').removeAttr('disabled');
+    }
+  }
+
+  // Evento de clique no botão de download
+  $('#download').click(function() {
+    getDownloadLink();
+  });
+});
 </script>
+
 
 
 </body>

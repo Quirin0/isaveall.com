@@ -17,12 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verificar de qual plataforma é a URL
         Hub::processURL($url);        
     }
-}
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if (isset($_GET['down'])){
-         // Obter a URL do campo 'down'
-        $url = $_GET['down'];
-        $format = $_GET['format'];
+    if (isset($_POST['link'])) {
+        $url = $_POST['link'];
+        $format = $_POST['format'];
         try {
             // Obtém o nome do arquivo
             $fileName = "nwtik-hubdownloader" . $format;
@@ -42,7 +39,5 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         } catch (\Throwable $th) {
             echo $th;    
         }
-        
-         
     }
 }
