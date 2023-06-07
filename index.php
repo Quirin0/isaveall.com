@@ -383,15 +383,26 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
 </script>
 
 <script>
-  const download = async (link, format) =>{
-    const formData1 = new FormData()
-    formData1.append('down', link);
-    formData1.append('format', format);
-    const response = await fetch('dl/index.php', {
-      method: 'POST',
-      body: formData1
-    })
-  }
+function downloadFile(url) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'dl/download.php?url=' + encodeURIComponent(url), true);
+  xhr.responseType = 'blob';
+
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      var blob = xhr.response;
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'teste.mp4'; // Nome do arquivo de destino
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
+
+  xhr.send();
+}
 </script>
 <script>
   const getDownloadLink = async () => {
@@ -425,12 +436,7 @@ document.addEventListener("DOMContentLoaded", function() { // On DOM Load initia
     links !== undefined && Object.keys(links).forEach(function (key) {
       const format = links[key].substring(links[key].length - 4);
       const urlPura = links[key].slice(0, -4);
-      if(res.title=='Facebook'){
-        $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="${urlPura}" download="nwtik-hubdownloader${format}" rel="nofollow">${key}</a>`);
-      }
-      else{
-        $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="dl/index.php?down=${urlPura}&format=${format}" rel="nofollow">${key}</a>`);
-      }
+      $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="#"  onclick="downloadFile('${urlPura}')" rel="nofollow">${key}</a>`);
     })
     
   } else {
