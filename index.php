@@ -4,112 +4,11 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DPX5XTJG1D"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-DPX5XTJG1D');
-</script>
-<!-- SEO -->
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no' />
-<meta name="color-scheme" content="dark light">
-<meta name="title" content="Nwtik - Hub Downloader">
-<meta name="description" content="Nwtik Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
-<meta name="keywords" content="nwtik, tiktok without watermark, tiktok download mp4, instagram reels download, insta download reels, reels download, insta download">
-<meta name="robots" content="index, follow">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="language" content="English">
-<meta name="revisit-after" content="1 days">
-<meta name="author" content="Admin">
-<meta name="google" content="translate" />
-<!-- TWITTER -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nwtik - Hub Downloader">
-<meta name="twitter:description" content="Nwtik Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
-<meta name="twitter:image:src" content="https://NwTik.com/assets/img/snapthumb.jpg">
-<meta name="twitter:site" content="nwtik.com">
-<!-- OG -->
-<meta property="og:locale" content="en" /> <meta name="msvalidate.01" content="1E856EC97F6E089FF79520F154CCFD0F" />
-<meta property="og:title" content="Nwtik - Hub Downloader">
-<meta property="og:type" content="article">
-<meta property="og:image" content="https://NwTik.com/assets/img/snapthumb.jpg">
-<meta property="og:description" content="Nwtik Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
-<meta property="og:site_name" content="NwTik.com">
-<link rel="apple-touch-icon" sizes="192x192" href="https://NwTik.com/img/icons-192.png">
-<link rel="shortcut icon" href="https://NwTik.com/assets/img/favicon.png" />
-<link rel="alternate" hreflang="x-default" href="https://NwTik.com/" />
-<link rel="canonical" href="https://NwTik.com/" />
-<link rel="preconnect" href="//www.google-analytics.com" crossorigin>
-<link rel="dns-prefetch" href="//www.google-analytics.com">
-<link rel="preconnect" href="//ssl.google-analytics.com" crossorigin>
-<link rel="dns-prefetch" href="//ssl.google-analytics.com">
-<link rel="preconnect" href="//pagead2.googlesyndication.com" crossorigin>
-<link rel="preconnect" href="https://adservice.google.com" crossorigin />
-<link rel="preconnect" href="https://partner.googleadservices.com" crossorigin />
-<link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin />
-<link rel="stylesheet" href="assets/css/style.css">
-
-<!-- Fontawesome -->
-<script src="https://kit.fontawesome.com/faa9bc7328.js" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-
-<style>
-  @import url('https://fonts.googleapis.com/css?family=Montserrat');
-
-.title {
-  font-size: 3rem;
-  padding: 0.5rem;
-  font-weight: bold;
-  letter-spacing: 0.1rem;
-  text-align: center;
-  overflow: hidden;
-}
-.title span.typed-text {
-  font-weight: 700;
-  color: #c330f1 !important;
-}
-.title span.cursor {
-  display: inline-block;
-  background-color: #ccc;
-  margin-left: 0.1rem;
-  width: 3px;
-  animation: blink 1s infinite;
-}
-.title span.cursor.typing {
-  animation: none;
-}
-@keyframes blink {
-  0%  { background-color: #ccc; }
-  49% { background-color: #ccc; }
-  50% { background-color: transparent; }
-  99% { background-color: transparent; }
-  100%  { background-color: #ccc; }
-}
-  </style>
+<?php include 'includes/head.php' ?>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-  <a href="https://NwTik.com/" class="navbar-brand fs24 fw700 align-items-center" title="TikTok Downloader" style="color:#4B2570; font-size:28px">Nw<span style="color:black;">Tik</span></a>
-    
-    <div role="button" class="navbar-burger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span></span><span></span><span></span></div>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.paypal.com/donate/?business=CMZFVZ6ETHGLQ&no_recurring=0&item_name=Hey%2C+thank+you+for+donation+%3C3&currency_code=BRL">Donate</a>
-        </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
+<?php include 'includes/nav.php' ?>
 
 
 <section id="hero" class="section hero">
@@ -125,7 +24,7 @@ gtag('config', 'G-DPX5XTJG1D');
   </div>
   <div class="is-relative" style="overflow: hidden;width: 100%;">
     <input name="url" id="link" type="text" class="link-input" value="" placeholder="Paste TikTok or Reels Here." required="" aria-label="Name" autocomplete="off" autocapitalize="none">
-    <button class="button button-paste" type="button" onclick="pasteFromClipboard()"><i class="fas fa-clipboard" style="margin-right: 5px;"></i><span>Paste</span></button>
+    <button class="button button-paste" id="pasteButton" type="button" onclick="togglePasteButton()"><i class="fas fa-clipboard" style="margin-right: 5px;"></i><span>Paste</span></button>
   </div>
   <style>
     @keyframes pulse {
@@ -161,9 +60,6 @@ gtag('config', 'G-DPX5XTJG1D');
         </div>
     </div>
 </div>
-
-
-
 
 </div>
 </div>
@@ -309,25 +205,7 @@ gtag('config', 'G-DPX5XTJG1D');
 </div>
 </div>
 </section>
-<footer class="footer">
-<div class="container">
-
-<div class="copyright"><span>© 2023 - 2023 NwTik - <a href="/">TikTok Video Download</a> Version 1.0</span></div>
-<p class="footer-menu">
-<a href="https://NwTik.com/landing/terms-of-service" rel="nofollow">Terms of Service</a> | <a href="https://NwTik.com/landing/privacy-policy" rel="nofollow">Privacy Policy</a>
-</p>
-</div>
-<div id="js-result"></div>
-</footer>
-
-<script>
-    function pasteFromClipboard() {
-      navigator.clipboard.readText().then(function (text) {
-        document.getElementById("link").value = text;
-      });
-    }
-</script>
-
+<?php include 'includes/footer.php' ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -338,118 +216,10 @@ gtag('config', 'G-DPX5XTJG1D');
      crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-const typedTextSpan = document.querySelector(".typed-text");
-const cursorSpan = document.querySelector(".cursor");
-
-const textArray = ["Instagram Reels", "Tiktok Videos", "Instagram Images", "Facebook Reels","Anything."];
-const typingDelay = 90;
-const erasingDelay = 50;
-const newTextDelay = 700; // Delay between current and next text
-let textArrayIndex = 0;
-let charIndex = 0;
-
-function type() {
-  if (charIndex < textArray[textArrayIndex].length) {
-    if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
-    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
-    charIndex++;
-    setTimeout(type, typingDelay);
-  } 
-  else {
-    cursorSpan.classList.remove("typing");
-  	setTimeout(erase, newTextDelay);
-  }
-}
-
-function erase() {
-	if (charIndex > 0) {
-    if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
-    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
-    charIndex--;
-    setTimeout(erase, erasingDelay);
-  } 
-  else {
-    cursorSpan.classList.remove("typing");
-    textArrayIndex++;
-    if(textArrayIndex>=textArray.length) textArrayIndex=0;
-    setTimeout(type, typingDelay + 1100);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
-  if(textArray.length) setTimeout(type, newTextDelay + 250);
-});
-</script>
-
-<script>
-function downloadFile(url) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'dl/download.php?url=' + encodeURIComponent(url), true);
-  xhr.responseType = 'blob';
-
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      var blob = xhr.response;
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'teste.mp4'; // Nome do arquivo de destino
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-  };
-
-  xhr.send();
-}
-</script>
-<script>
-  const getDownloadLink = async () => {
-  $('#result').hide()
-
-  const vid_url = $('#link').val()
-
-  $('#download').val('Loading ...')
-  $('#download').attr('disabled', 'disabled')
-
-  $('#bar').show()
-
-  const formData = new FormData()
-  formData.append('url', vid_url)
-  const response = await fetch('dl/index.php', {
-    method: 'POST',
-    body: formData
-  })
-
-  const res = await response.json()
-  if (res.success) {
-    $('#bar').hide()
-    $('#result').show()
-
-    $('#title').html(res.title)
-
-    $('#links').html('')
-
-    const links = res.links
-    
-    links !== undefined && Object.keys(links).forEach(function (key) {
-      const format = links[key].substring(links[key].length - 4);
-      const urlPura = links[key].slice(0, -4);
-      $('#links').append(`<a class="button download-file w-100 mb-3" name="down" href="#"  onclick="downloadFile('${urlPura}')" rel="nofollow">${key}</a>`);
-    })
-    
-  } else {
-    $('#bar').hide()
-    alert(res.message)
-  }
-
-  $('#download').val('Download')
-  $('#download').removeAttr('disabled')
-}
-
-
-</script>
+<script src="assets/js/typedText.js"></script>
+<script src="assets/js/downloadFile.js"></script>
+<script src="assets/js/getDownloadLink.js"></script>
+<script src="assets/js/pasteFromClipboard.js"></script>
 
 
 </body>
