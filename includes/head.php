@@ -25,13 +25,13 @@ gtag('config', 'G-DPX5XTJG1D');
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iSaveAll - Hub Downloader">
 <meta name="twitter:description" content="iSaveAll Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
-<meta name="twitter:image:src" content="https://iSaveAll.com/assets/img/snapthumb.jpg">
+<meta name="twitter:image:src" content="https://iSaveAll.com/assets/img/favicon.png">
 <meta name="twitter:site" content="iSaveAll.com">
 <!-- OG -->
 <meta property="og:locale" content="en" /> <meta name="msvalidate.01" content="1E856EC97F6E089FF79520F154CCFD0F" />
 <meta property="og:title" content="iSaveAll - Hub Downloader">
 <meta property="og:type" content="article">
-<meta property="og:image" content="https://iSaveAll.com/assets/img/snapthumb.jpg">
+<meta property="og:image" content="https://iSaveAll.com/assets/img/favicon.png">
 <meta property="og:description" content="iSaveAll Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
 <meta property="og:site_name" content="iSaveAll.com">
 <link rel="apple-touch-icon" sizes="192x192" href="https://iSaveAll.com/img/icons-192.png">
@@ -46,7 +46,7 @@ gtag('config', 'G-DPX5XTJG1D');
 <link rel="preconnect" href="https://adservice.google.com" crossorigin />
 <link rel="preconnect" href="https://partner.googleadservices.com" crossorigin />
 <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin />
-
+<link rel="icon" type="image/x-icon" href="https://iSaveAll.com/assets/img/favicon.png">
 <!-- Fontawesome -->
 <script src="https://kit.fontawesome.com/faa9bc7328.js" crossorigin="anonymous"></script>
 
