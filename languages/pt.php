@@ -76,7 +76,7 @@ session_start();
 <h3 class="text-center ">Baixe qualquer mídia gratuitamente</h3>
 <br>
 <p>
-  <b>Nwtik.com</b> é um dos melhores Hub Downloader para baixar TikTok sem marca d'água, Instagram Reels, imagens do Instagram e qualquer coisa que você queira. Você não precisa instalar nenhum software no seu computador ou celular, tudo o que você precisa é do link da plataforma e todo o processamento é feito do nosso lado, para que você possa estar a apenas um clique de baixar para seus dispositivos.</p>
+  <b>iSaveAll.com</b> é um dos melhores Hub Downloader para baixar TikTok sem marca d'água, Instagram Reels, imagens do Instagram e qualquer coisa que você queira. Você não precisa instalar nenhum software no seu computador ou celular, tudo o que você precisa é do link da plataforma e todo o processamento é feito do nosso lado, para que você possa estar a apenas um clique de baixar para seus dispositivos.</p>
 <h4 class="subtitle f14 mb-3">Principais recursos:</h4>
 <ul>
 <li>Sem marca d'água para melhor qualidade, o que a maioria das ferramentas não oferece.</li>
@@ -85,11 +85,11 @@ session_start();
 <li>Baixe imagens do Instagram em alta resolução.</li>
 <li>Faça o download usando seu navegador: quero manter as coisas simples para você. Não é necessário baixar ou instalar nenhum software. Também criei um aplicativo para esse fim, mas você pode instalá-lo apenas quando desejar.</li>
 <li>É sempre gratuito. Coloco apenas alguns anúncios, que ajudam a manter nossos serviços e desenvolvimentos futuros.</li> 
-<li>O novo NwTik permite aos usuários baixar o slideshow de fotos do TikTok no formato de vídeo Mp4. As imagens e a música no slideshow do TikTok são automaticamente mescladas pelo NwTik. Além disso, você também pode baixar cada imagem do slideshow diretamente para o seu computador.</li> </ul>
+<li>O novo iSaveAll permite aos usuários baixar o slideshow de fotos do TikTok no formato de vídeo Mp4. As imagens e a música no slideshow do TikTok são automaticamente mescladas pelo iSaveAll. Além disso, você também pode baixar cada imagem do slideshow diretamente para o seu computador.</li> </ul>
 <br>
 </section>
 <section class="container mt-1">
-  <h3 class="text-center font-weight-600">Como usar o Nwtik Video Downloader</h3>
+  <h3 class="text-center font-weight-600">Como usar o iSaveAll Video Downloader</h3>
 <div class="row text-left">
   <div class="col-md-4 mt-4 mx-0 pr-md-4">
     <h5>Encontre o link do conteúdo que você deseja</h5>
@@ -120,7 +120,7 @@ session_start();
           <li>Clique no botão de compartilhamento no canto inferior direito.</li>
           <li>Clique no botão "Copiar link".</li>
           <li>Baixe usando seu navegador: Eu quero simplificar as coisas para você. Não é necessário baixar ou instalar nenhum software. Também criei um aplicativo para esse fim, mas você pode instalá-lo apenas quando desejar.</li>
-          <li>Volte para NwTik.com e cole seu link de download no campo acima e clique no botão "Download".</li>
+          <li>Volte para iSaveAll.com e cole seu link de download no campo acima e clique no botão "Download".</li>
           <li>Aguarde nosso servidor fazer o trabalho dele e, em seguida, salve o vídeo no seu dispositivo.</li>
         </ul>
       </div>
@@ -202,8 +202,8 @@ session_start();
 </div>
 
 
-<p>NwTik respeita os direitos de propriedade intelectual das faixas, por isso não fornecerá essa solução. No entanto, atualmente existem diversos sites e aplicativos que oferecem esse serviço de conversão para MP3 do TikTok, como <b>Tikmate</b>, <b>SaveTik.Net</b>, <b>SSStiktok</b>, etc. Você pode baixar músicas em MP3 do TikTok, mas não é permitido usá-las para atividades comerciais ou monetizá-las.</p>
-<p><b>Observação:</b> NwTik (<i>Tiktok Video Downloader</i>) não é uma ferramenta oficial do TikTok, não temos relação com o TikTok ou a ByteDance Ltd. Apenas oferecemos suporte aos usuários do TikTok para baixar vídeos sem logotipo sem qualquer problema. Se você está tendo problemas com sites como Tikmate ou SSSTiktok, experimente o NwTik, estamos sempre atualizando para facilitar o download de vídeos do TikTok. Obrigado!</p>
+<p>iSaveAll respeita os direitos de propriedade intelectual das faixas, por isso não fornecerá essa solução. No entanto, atualmente existem diversos sites e aplicativos que oferecem esse serviço de conversão para MP3 do TikTok, como <b>Tikmate</b>, <b>SaveTik.Net</b>, <b>SSStiktok</b>, etc. Você pode baixar músicas em MP3 do TikTok, mas não é permitido usá-las para atividades comerciais ou monetizá-las.</p>
+<p><b>Observação:</b> iSaveAll (<i>Tiktok Video Downloader</i>) não é uma ferramenta oficial do TikTok, não temos relação com o TikTok ou a ByteDance Ltd. Apenas oferecemos suporte aos usuários do TikTok para baixar vídeos sem logotipo sem qualquer problema. Se você está tendo problemas com sites como Tikmate ou SSSTiktok, experimente o iSaveAll, estamos sempre atualizando para facilitar o download de vídeos do TikTok. Obrigado!</p>
 </div>
 </div>
 </div>

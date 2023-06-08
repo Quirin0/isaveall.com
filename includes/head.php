@@ -12,9 +12,9 @@ gtag('config', 'G-DPX5XTJG1D');
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no' />
 <meta name="color-scheme" content="dark light">
-<meta name="title" content="Nwtik - Hub Downloader">
-<meta name="description" content="Nwtik Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
-<meta name="keywords" content="nwtik, tiktok without watermark, tiktok download mp4, instagram reels download, insta download reels, reels download, insta download">
+<meta name="title" content="iSaveAll - Hub Downloader">
+<meta name="description" content="iSaveAll Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
+<meta name="keywords" content="iSaveAll, tiktok without watermark, tiktok download mp4, instagram reels download, insta download reels, reels download, insta download">
 <meta name="robots" content="index, follow">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="language" content="English">
@@ -23,21 +23,21 @@ gtag('config', 'G-DPX5XTJG1D');
 <meta name="google" content="translate" />
 <!-- TWITTER -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nwtik - Hub Downloader">
-<meta name="twitter:description" content="Nwtik Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
-<meta name="twitter:image:src" content="https://NwTik.com/assets/img/snapthumb.jpg">
-<meta name="twitter:site" content="nwtik.com">
+<meta name="twitter:title" content="iSaveAll - Hub Downloader">
+<meta name="twitter:description" content="iSaveAll Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
+<meta name="twitter:image:src" content="https://iSaveAll.com/assets/img/snapthumb.jpg">
+<meta name="twitter:site" content="iSaveAll.com">
 <!-- OG -->
 <meta property="og:locale" content="en" /> <meta name="msvalidate.01" content="1E856EC97F6E089FF79520F154CCFD0F" />
-<meta property="og:title" content="Nwtik - Hub Downloader">
+<meta property="og:title" content="iSaveAll - Hub Downloader">
 <meta property="og:type" content="article">
-<meta property="og:image" content="https://NwTik.com/assets/img/snapthumb.jpg">
-<meta property="og:description" content="Nwtik Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
-<meta property="og:site_name" content="NwTik.com">
-<link rel="apple-touch-icon" sizes="192x192" href="https://NwTik.com/img/icons-192.png">
-<link rel="shortcut icon" href="https://NwTik.com/assets/img/favicon.png" />
-<link rel="alternate" hreflang="x-default" href="https://NwTik.com/" />
-<link rel="canonical" href="https://NwTik.com/" />
+<meta property="og:image" content="https://iSaveAll.com/assets/img/snapthumb.jpg">
+<meta property="og:description" content="iSaveAll Hub Video Downloader is one of the best free Download Hub of medias, You can download TikTok, Instagram, Youtube, Facebook, etc...">
+<meta property="og:site_name" content="iSaveAll.com">
+<link rel="apple-touch-icon" sizes="192x192" href="https://iSaveAll.com/img/icons-192.png">
+<link rel="shortcut icon" href="https://iSaveAll.com/assets/img/favicon.png" />
+<link rel="alternate" hreflang="x-default" href="https://iSaveAll.com/" />
+<link rel="canonical" href="https://iSaveAll.com/" />
 <link rel="preconnect" href="//www.google-analytics.com" crossorigin>
 <link rel="dns-prefetch" href="//www.google-analytics.com">
 <link rel="preconnect" href="//ssl.google-analytics.com" crossorigin>
