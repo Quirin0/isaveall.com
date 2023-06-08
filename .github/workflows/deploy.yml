@@ -1,5 +1,5 @@
 on: push
-name: nwtik.com
+name: isaveall.com
 jobs:
   web-deploy:
     name: 🎉 Deploy
