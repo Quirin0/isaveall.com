@@ -10,7 +10,7 @@ function downloadFile(url, format) {
         var blob = xhr.response;
         var a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'nwtik-hubdownloader'+format; // Nome do arquivo de destino
+        a.download = 'nwtik-hubdownloader'+Math.floor(Math.random() * (1000 - 0 + 1))+format; // Nome do arquivo de destino
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();

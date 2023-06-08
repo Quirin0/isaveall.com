@@ -46,7 +46,6 @@ gtag('config', 'G-DPX5XTJG1D');
 <link rel="preconnect" href="https://adservice.google.com" crossorigin />
 <link rel="preconnect" href="https://partner.googleadservices.com" crossorigin />
 <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin />
-<link rel="stylesheet" href="assets/css/style.css">
 
 <!-- Fontawesome -->
 <script src="https://kit.fontawesome.com/faa9bc7328.js" crossorigin="anonymous"></script>

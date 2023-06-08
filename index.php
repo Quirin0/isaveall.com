@@ -5,6 +5,7 @@ session_start();
 <html lang="en">
 <head>
 <?php include 'includes/head.php' ?>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
@@ -151,12 +152,12 @@ session_start();
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingTwo">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Where are TikTok videos saved after being downloaded?
+        Where are videos saved after being downloaded?
       </button>
     </h2>
     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        When you're downloading files, they are usually saved into whatever folder you have set as your default. Your browser normally sets this folder for you. In browser settings, you can change and choose manually the destination folder for your downloaded TikTok videos.
+        When you're downloading files, they are usually saved into whatever folder you have set as your default. Your browser normally sets this folder for you. In browser settings, you can change and choose manually the destination folder for your downloaded videos.
       </div>
     </div>
   </div>
@@ -193,6 +194,43 @@ session_start();
     <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         Any devices that can run the popular browsers such as Chrome, IE, Safari, Firefox are supported to use our service.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        How to get the Instagram Video or Image Download Link?
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <ul class="list-unstyled">
+          <li>Open your Instagram application</li>
+          <li>Choose the Instagram video that you want to download</li>
+          <li>Click Share and at the Share options, find Copy Link button</li>
+          <li>Your download URL is ready on the clipboard.</li>
+        </ul>
+        <div class="example">
+          <b>For example, the link would look like this:</b>
+          <div class="link-example">https://instagram.com/reel/UFLNjnh/</div>
+          <div class="link-example">https://instagram.com/p/UFLNjnh/</div>
+          and more...
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+      Can i download high definition resolution videos at iSaveAll ?
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <ul class="list-unstyled">
+          <li>Yes, iSaveAll is a video downloader that provides the highest resolution for you. If we find a Full HD or higher resolution of a Tiktok video, Instagram reels, Facebook Reels, we will immediately show a high quality Download link and you can download it.</li>
+        </ul>
       </div>
     </div>
   </div>
