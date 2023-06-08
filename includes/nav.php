@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-  <a href="https://iSaveAll.com/" class="navbar-brand fs24 fw700 align-items-center" title="TikTok Downloader" style="color:#4B2570; font-size:28px">Nw<span style="color:black;">Tik</span></a>
+  <a href="https://iSaveAll.com/" class="navbar-brand fs24 fw700 align-items-center" title="TikTok Downloader" style="color:#4B2570; font-size:28px">i<span style="color:black;">Save</span>All</a>
     
     <div role="button" class="navbar-burger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span></span><span></span><span></span></div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
