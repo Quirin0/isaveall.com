@@ -137,9 +137,9 @@ class Hub {
         } elseif (self::isInstagramURL($url)) {
             $msg = [];
             // If account is private and you subscribed to it, first login
-            $instagram  = Instagram::withCredentials(new \GuzzleHttp\Client(), '', '', null);
-            $instagram->loginWithSessionId('9157536476%3A6jhMdphPIC8MvF%3A25%3AAYcPTeKGfK5R96s6YL-xe5ULkIT5nIQf19c-EHUMyQ');
-
+            $instagram = \InstagramScraper\Instagram::withCredentials(new \GuzzleHttp\Client(), 'matheus_qb1', 'teteu123', new Psr16Adapter('Files'));
+            $instagram->login();
+            $instagram->saveSession(31536000); 
             // Trata a Url para remover as informações após o código do reels ou imagem
             if (preg_match('/https:\/\/www.instagram.com\/(?:reel|p)\/[^\/]+/', $url, $matches)) {
                 $url = $matches[0];

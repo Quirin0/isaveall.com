@@ -24,7 +24,7 @@ session_start();
     <div class="message-body"></div>
   </div>
   <div class="is-relative" style="overflow: hidden;width: 100%;">
-    <input name="url" id="link" type="text" class="link-input" value="" placeholder="Paste TikTok or Reels Here." required="" aria-label="Name" autocomplete="off" autocapitalize="none">
+    <input name="url" id="link" type="text" class="link-input" value="" placeholder="Paste Anything Here. ( Tiktok, Instagram, Facebook )" required="" aria-label="Name" autocomplete="off" autocapitalize="none">
     <button class="button button-paste" id="pasteButton" type="button" onclick="togglePasteButton()"><i class="fas fa-clipboard" style="margin-right: 5px;"></i><span>Paste</span></button>
   </div>
   <style>
