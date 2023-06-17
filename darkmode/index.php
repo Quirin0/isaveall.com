@@ -4,12 +4,26 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include 'includes/head.php' ?>
-<link rel="stylesheet" href="assets/css/style.css">
+<?php include '../includes/head.php' ?>
+<link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 
-<?php include 'includes/nav.php' ?>
+<nav class="navbar navbar-expand-lg" style="background-color:#1f1f1f !important;box-shadow: 0 2px 0 0 #1f1f1f;">
+  <div class="container-fluid">
+  <a href="https://iSaveAll.com/" class="navbar-brand fs24 fw700 align-items-center" title="TikTok Downloader" style="color:#4B2570; font-size:28px">i<span style="color:white;">Save</span>All</a>
+    
+    <div role="button" class="navbar-burger" style="color: white;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span></span><span></span><span></span></div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="https://isaveall.com/" style="color:white;">Light Mode</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
 
 
 <section id="hero" class="section hero">
@@ -67,7 +81,7 @@ session_start();
 
 </div>
 </section>
-<section id="main" class="section">
+<section id="main" class="section" style="background-color:#121212 !important; color:white !important;">
 <div class="container">
 
 <div id="download" class="download"></div>
@@ -76,7 +90,7 @@ session_start();
 <h5 class="text-center font-weight-600">Download Anything for FREE</h5>
 <br>
 <p><b><u><a href="https://isaveall.com/">iSaveAll.com</a></u></b> is one of the best Hub Downloader <b>TikTok Without Watermark, Instagram Reels, Instagram Images</b>, Anything you want you can download here. You are not required to install any software on your computer or mobile phone, all that you need is the plataform link, and all the processing is done on our side so you can be <b>one click</b> away from downloading to your devices.</p>
-<h4 class="subtitle f14 mb-3">Key features:</h4>
+<h4 class="subtitle f14 mb-3" style="color:white;">Key features:</h4>
 <ul>
 <li>No watermark for better quality, which most of the tools out there can't.</li>
 <li>Download TikTok videos on any devices that you want: mobile, PC, or tablet. TikTok only allows users to download videos by its application and downloaded videos contain the watermark.</li>
@@ -284,7 +298,17 @@ session_start();
 </div>
 </div>
 </section>
-<?php include 'includes/footer.php' ?>
+<footer class="footer" style="background-color:#1f1f1f; color:white;">
+  <div class="container">
+
+  <div class="copyright"><span>© 2023 - 2023 iSaveAll - <a href="/">TikTok Video Download</a> Version 1.0</span></div>
+  <p class="footer-menu">
+  <a href="https://iSaveAll.com/landing/terms-of-service" rel="nofollow">Terms of Service</a> | <a href="https://iSaveAll.com/landing/privacy-policy" rel="nofollow">Privacy Policy</a>
+  </p>
+  </div>
+  <div id="js-result"></div>
+</footer>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -295,10 +319,10 @@ session_start();
      crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="assets/js/typedText.js"></script>
-<script src="assets/js/downloadFile.js"></script>
-<script src="assets/js/getDownloadLink.js"></script>
-<script src="assets/js/pasteFromClipboard.js"></script>
+<script src="../assets/js/typedText.js"></script>
+<script src="../assets/js/downloadFile.js"></script>
+<script src="../assets/js/getDownloadLink.js"></script>
+<script src="../assets/js/pasteFromClipboard.js"></script>
 
 
 </body>

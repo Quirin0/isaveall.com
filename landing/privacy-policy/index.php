@@ -96,7 +96,7 @@ gtag('config', 'G-DPX5XTJG1D');
   </div>
 </nav>
 
-<div class="columns">
+<div class="columns container">
 <div class="column is-12">
 <div>
 <h1 class="mt-0 mb-4 title is-1">Privacy Policy – iSaveAll</h1>
