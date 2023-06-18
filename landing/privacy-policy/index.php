@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include 'includes/head.php' ?>
-<link rel="stylesheet" href="assets/css/style.css">
+<?php include '../../includes/head.php' ?>
+<link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
 
-<?php include 'includes/nav.php' ?>
+<?php include '../../includes/nav.php' ?>
 <div class="columns container">
 <div class="column is-12">
 <div>
@@ -33,7 +33,7 @@
 </div>
 
 
-<?php include 'includes/footer.php' ?>
+<?php include '../../includes/footer.php' ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
