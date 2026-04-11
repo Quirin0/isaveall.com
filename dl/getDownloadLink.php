@@ -3,7 +3,7 @@ session_start();
 
 require_once '../vendor/autoload.php';
 require_once '../src/Hub.php';
-
+ 
 // Incluir o arquivo que contém a classe Hub
 use Hub\Hub;
 use React\Promise\Promise;

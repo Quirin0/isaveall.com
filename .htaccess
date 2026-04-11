@@ -3,6 +3,7 @@ Options All -Indexes
 Options +FollowSymLinks
 
 RewriteCond %{HTTPS} !=on
+<<<<<<< HEAD
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 <IfModule mod_security.c>
@@ -19,3 +20,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 </IfModule>
+=======
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+>>>>>>> 4793571 (.)

@@ -3,7 +3,7 @@
 $url = $_POST['url'];
 //Define header information
 header('Content-Description: File Transfer');
-header('Content-Type: application/octet-stream');
+header('Content-Type: application/octet-stream'); 
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: 0");
 header('Content-Disposition: attachment; filename="'.basename($url).'"');
