@@ -1,24 +1,19 @@
 <?php
- 
+
 namespace Hub;
 
-use React\Promise\Promise;
-use React\Promise\Deferred;
-use DOMDocument;
-use DOMXPath;
-use Phpfastcache\Helper\Psr16Adapter;
-use InstagramScraper\Instagram;
 use Exception;
-use Symfony\Component\HttpClient\HttpClient;
 
 class Hub {
 
     public static $url;
 
+    private static $curlUserAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+
     public static function setUrl($url) {
         self::$url = $url;
     }
-    
+
     public static function generateId($url)
     {
         $id = '';
@@ -27,307 +22,310 @@ class Hub {
         } elseif (preg_match('#(\d+)/?$#', $url, $matches)) {
             $id = $matches[1];
         }
-
         return $id;
     }
 
     public static function cleanStr($str)
     {
         $tmpStr = "{\"text\": \"{$str}\"}";
-
         return json_decode($tmpStr)->text;
     }
 
-    public static function getHDLink($curl_content)
+    public static function getTitle($html)
     {
-        $regexRateLimit = '/playable_url_quality_hd":"([^"]+)"/';
-
-        if (preg_match($regexRateLimit, $curl_content, $match)) {
-            return self::cleanStr($match[1]);
-        } else {
-            return false;
+        $title = '';
+        if (preg_match('/<title[^>]*>(.*?)<\/title>/si', $html, $matches)) {
+            $title = html_entity_decode(trim($matches[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8');
         }
+        return $title;
     }
-
-    public static function getTitle($curl_content)
-    {
-        $title = null;
-        if (preg_match('/<title>(.*?)<\/title>/', $curl_content, $matches)) {
-            $title = $matches[1];
-        } elseif (preg_match('/title id="pageTitle">(.+?)<\/title>/', $curl_content, $matches)) {
-            $title = $matches[1];
-        }
-
-        return self::cleanStr($title);
-    }
-
-    public static function getDescription($curl_content)
-    {
-        if (preg_match('/span class="hasCaption">(.+?)<\/span>/', $curl_content, $matches)) {
-            return self::cleanStr($matches[1]);
-        }
-
-        return false;
-    }    
 
     public static function isTikTokURL($url)
     {
-        // Implemente a lógica para verificar se a URL é do TikTok
         $parsedUrl = parse_url($url);
         if ($parsedUrl === false || !isset($parsedUrl['host'])) {
             return false;
         }
-
         $host = strtolower($parsedUrl['host']);
-        return strpos($host, 'tiktok.com') !== false || strpos($host, 'tiktok.com') !== false;
+        return strpos($host, 'tiktok.com') !== false || strpos($host, 'vm.tiktok.com') !== false;
     }
 
     public static function isInstagramURL($url)
     {
-        // Implemente a lógica para verificar se a URL é do Instagram
         $parsedUrl = parse_url($url);
         if ($parsedUrl === false || !isset($parsedUrl['host'])) {
             return false;
         }
-
         $host = strtolower($parsedUrl['host']);
         return strpos($host, 'instagram.com') !== false || strpos($host, 'instagr.am') !== false;
     }
 
     public static function isFacebookURL($url)
     {
-        // Implemente a lógica para verificar se a URL é do Facebook
         $parsedUrl = parse_url($url);
         if ($parsedUrl === false || !isset($parsedUrl['host'])) {
             return false;
         }
-
         $host = strtolower($parsedUrl['host']);
-        return strpos($host, 'facebook.com') !== false || strpos($host, 'm.facebook.com') !== false;
+        return strpos($host, 'facebook.com') !== false || strpos($host, 'fb.watch') !== false;
     }
-    
+
     /**
-     * Método responsável por processar de qual plataforma a url se trata, e também processar se é um video ou uma imagem
-     * Logo em seguida iniciar o download (TODO: corrigir para retornar opcao de baixar Audio )
+     * Cria um handle cURL com configurações padrão
+     */
+    private static function createCurl($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_ENCODING, '');
+        curl_setopt($ch, CURLOPT_USERAGENT, self::$curlUserAgent);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        return $ch;
+    }
+
+    /**
+     * Processa a URL e retorna JSON com os links de download
      * @param string $url
      */
     public static function processURL($url)
     {
-        if (self::isTikTokURL($url)) {
-            self::setUrl($url);
-            $response = self::tiktokdownload($url);
-            $msg = [];
-            $response->then(function ($resultado) {
-                // Capturar os valores de "nowm", "wm" e "audio" em um array
-                $urls = [
-                    'No Watermark'   => $resultado['nowm'] . '.mp4',
-                    'With Watermark' => $resultado['wm']   . '.mp4'
-                ];
-                
-                $msg['success'] = true;
-                
-                $msg['id'] = "111";
-                $msg['title'] = "Tiktok";
-                $msg['links'] = $urls;
-                echo json_encode($msg);
-                
-            })->done();
+        header('Content-Type: application/json');
+        $msg = [];
 
-
-        } elseif (self::isInstagramURL($url)) {
-            $msg = [];
-            // If account is private and you subscribed to it, first login
-            $instagram = \InstagramScraper\Instagram::withCredentials(new \GuzzleHttp\Client(), 'matheus_qb1', 'teteu123', new Psr16Adapter('Files'));
-            $instagram->login();
-            $instagram->saveSession(31536000); 
-            // Trata a Url para remover as informações após o código do reels ou imagem
-            if (preg_match('/https:\/\/www.instagram.com\/(?:reel|p)\/[^\/]+/', $url, $matches)) {
-                $url = $matches[0];
-                $media = $instagram->getMediaByUrl($url);
-                if (strpos($url, '/p/') !== false) {
-                    // Se a URL contém '/p/', executar o método getImageHighResolutionUrl()
-                    try {
-                        $highRes = $media->getImageHighResolutionUrl();
-                        $lowRes  = $media->getImageStandardResolutionUrl();
-                        $urls  = [
-                            'Full HD Image'        => $highRes,
-                            'Low Resolution Image' => $lowRes 
-                        ];
-                        $msg['success'] = true;
-                        $msg['id']      = "222";
-                        $msg['title']   = 'Instagram';
-                        $msg['links']   = $urls;
-                        echo json_encode($msg);
-                    } catch (\Throwable $th) {
-                        echo $th;
-                    }
-                } elseif (strpos($url, '/reel/') !== false) {
-                    // Se a URL contém '/reel/', executar o método getVideoStandardResolutionUrl()
-                    try {
-                        $highRes = $media->getVideoStandardResolutionUrl();
-                        $lowRes  = $media->getVideoLowResolutionUrl();
-                        $urls = [
-                            'Full HD Video' => $highRes . '.mp4',
-                            'Hd Video'      => $lowRes  . '.mp4'
-                        ];
-                        $msg['success'] = true;
-                        $msg['id']      = "333";
-                        $msg['title']   = 'Instagram';
-                        $msg['links']   = $urls;
-                        echo json_encode($msg);
-                    } catch (\Throwable $th) {
-                        echo $th;
-                    }
+        try {
+            if (self::isTikTokURL($url)) {
+                $result = self::tiktokdownload($url);
+                $links = [];
+                if (!empty($result['nowm'])) {
+                    $links['Sem Marca d\'água'] = $result['nowm'] . '.mp4';
                 }
+                if (!empty($result['wm'])) {
+                    $links['Com Marca d\'água'] = $result['wm'] . '.mp4';
+                }
+                if (!empty($result['audio'])) {
+                    $links['Apenas Áudio'] = $result['audio'] . '.mp3';
+                }
+                if (empty($links)) {
+                    throw new Exception('Não foi possível obter os links do TikTok. Tente novamente.');
+                }
+                $msg['success'] = true;
+                $msg['id']      = '111';
+                $msg['title']   = $result['title'] ?? 'TikTok';
+                $msg['links']   = $links;
+
+            } elseif (self::isInstagramURL($url)) {
+                $result = self::instagramDownload($url);
+                $msg['success'] = true;
+                $msg['id']      = '222';
+                $msg['title']   = 'Instagram';
+                $msg['links']   = $result['links'];
+
+            } elseif (self::isFacebookURL($url)) {
+                $result = self::facebookDownload($url);
+                $msg['success'] = true;
+                $msg['id']      = self::generateId($url);
+                $msg['title']   = $result['title'] ?? 'Facebook';
+                $msg['links']   = $result['links'];
+
+            } else {
+                $msg['success'] = false;
+                $msg['message'] = 'URL não suportada. Use links do TikTok, Instagram ou Facebook.';
             }
-        } elseif(self::isFacebookURL($url)) {
-            self::setUrl($url);
-            try {
-                header('Content-Type: application/json');
-    
-                $msg = [];
-                $headers = [
-                    'sec-fetch-user'            => '?1',
-                    'sec-ch-ua-mobile'          => '?0',
-                    'sec-fetch-site'            => 'none',
-                    'sec-fetch-dest'            => 'document',
-                    'sec-fetch-mode'            => 'navigate',
-                    'cache-control'             => 'max-age=0',
-                    'authority'                 => 'www.facebook.com',
-                    'upgrade-insecure-requests' => '1',
-                    'accept-language'           => 'en-GB,en;q=0.9,tr-TR;q=0.8,tr;q=0.7,en-US;q=0.6',
-                    'sec-ch-ua'                 => '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
-                    'user-agent'                => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36',
-                    'accept'                    => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                    'cookie'                    => 'sb=Rn8BYQvCEb2fpMQZjsd6L382; datr=Rn8BYbyhXgw9RlOvmsosmVNT; c_user=100003164630629; _fbp=fb.1.1629876126997.444699739; wd=1920x939; spin=r.1004812505_b.trunk_t.1638730393_s.1_v.2_; xs=28%3A8ROnP0aeVF8XcQ%3A2%3A1627488145%3A-1%3A4916%3A%3AAcWIuSjPy2mlTPuZAeA2wWzHzEDuumXI89jH8a_QIV8; fr=0jQw7hcrFdas2ZeyT.AWVpRNl_4noCEs_hb8kaZahs-jA.BhrQqa.3E.AAA.0.0.BhrQqa.AWUu879ZtCw',
-                ];
-
-
-                $client = HttpClient::create([
-                    'headers' => $headers,
-                ]);
-
-                $response = $client->request('GET', $url);
-
-                $data = $response->getContent();
-
-                $msg['success'] = true;
-
-                $msg['id'] = self::generateId($url);
-                $msg['title'] = self::getTitle($data);
-
-                if ($hdLink = self::getHDLink($data)) {
-                    $msg['links']['Video High Quality'] = $hdLink . '&dl=1.mp4';
-                }
-                } catch (Exception $e) {
-                    $msg['success'] = false;
-                    $msg['message'] = $e->getMessage();
-                }
-
-                echo json_encode($msg);
-
-        }
-        else{
+        } catch (Exception $e) {
             $msg['success'] = false;
-            $msg['message'] = "No video or image found. Try again";
-            echo json_encode($msg);
+            $msg['message'] = $e->getMessage();
         }
+
+        echo json_encode($msg);
     }
-    
 
     /**
-     * Método responsável por baixar um video do TikTok
-     * @param string $url 
-     * @return Promise Uma promessa que será resolvida com o caminho do arquivo baixado ou rejeitada com uma mensagem de erro.
+     * Download do TikTok via API tikwm.com
+     * @param string $url
+     * @return array
      */
-    public static function tiktokdownload($url) {
-        return new Promise(function($resolve, $reject) use ($url) {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://ttdownloader.com/');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HEADER, true);
-            $response = curl_exec($ch);
-            $error = curl_error($ch);
-            curl_close($ch);
-  
-            if ($response === false) {
-                $reject(array('status' => false, 'message' => 'error fetch data', 'e' => $error));
-            }
-  
-            preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $response, $matches);
-            $cookies = array();
-            foreach($matches[1] as $item) {
-                parse_str($item, $cookie);
-                $cookies = array_merge($cookies, $cookie);
-            }
-  
-            $dataPost = array(
-                'url' => $url,
-                'format' => '',
-                'token' => ''
-            );
-  
-            $dom = new DOMDocument();
-            libxml_use_internal_errors(true);
-            $dom->loadHTML($response);
-            libxml_clear_errors();
-  
-            $xpath = new DOMXPath($dom);
-  
-            $tokenElement = $xpath->query('//*[@id="token"]')->item(0);
-            if ($tokenElement) {
-                $dataPost['token'] = $tokenElement->getAttribute('value');
-            }
-  
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://ttdownloader.com/search/');
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataPost));
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
-                'Origin: https://ttdownloader.com',
-                'Referer: https://ttdownloader.com/',
-                'Cookie: ' . http_build_query($cookies, '', '; ')
-            ));
-            $response = curl_exec($ch);
-            $error = curl_error($ch);
-            curl_close($ch);
-  
-            if ($response === false) {
-                $reject(array('status' => false, 'message' => 'error fetch data', 'e' => $error));
-            }
-  
-            $dom = new DOMDocument();
-            libxml_use_internal_errors(true);
-            $dom->loadHTML($response);
-            libxml_clear_errors();
-  
-            $result = array(
-                'nowm' => null,
-                'wm' => null,
-                'audio' => null
-            );
-  
-            $xpath = new DOMXPath($dom);
-  
-            $nowmNode = $xpath->query('//*[@id="results-list"]/div[1]/div[2]/a')->item(0);
-            if ($nowmNode) {
-                $result['nowm'] = $nowmNode->getAttribute('href');
-            }
-  
-            $wmNode = $xpath->query('//*[@id="results-list"]/div[2]/div[2]/a')->item(0);
-            if ($wmNode) {
-                $result['wm'] = $wmNode->getAttribute('href');
-            }
-  
-            $audioNode = $xpath->query('//*[@id="results-list"]/div[3]/div[2]/a')->item(0);
-            if ($audioNode) {
-                $result['audio'] = $audioNode->getAttribute('href');
-            }
-            
-            $resolve($result);
-        });
+    public static function tiktokdownload($url)
+    {
+        $ch = self::createCurl('https://www.tikwm.com/api/');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['url' => $url, 'hd' => 1]));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/x-www-form-urlencoded',
+            'Referer: https://www.tikwm.com/',
+        ]);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error    = curl_error($ch);
+        curl_close($ch);
+
+        if ($response === false || $httpCode !== 200) {
+            throw new Exception('Falha ao conectar ao serviço do TikTok: ' . $error);
+        }
+
+        $data = json_decode($response, true);
+
+        if (!$data || !isset($data['code']) || $data['code'] !== 0 || empty($data['data'])) {
+            throw new Exception('Nenhum vídeo encontrado. Verifique o link do TikTok.');
+        }
+
+        return [
+            'nowm'  => $data['data']['play']   ?? '',
+            'wm'    => $data['data']['wmplay']  ?? '',
+            'audio' => $data['data']['music']   ?? '',
+            'title' => $data['data']['title']   ?? 'TikTok',
+        ];
     }
-  }
-  ?>
+
+    /**
+     * Download do Instagram via scraping da página
+     * @param string $url
+     * @return array
+     */
+    public static function instagramDownload($url)
+    {
+        if (!preg_match('/instagram\.com\/(reel|p|tv)\/([A-Za-z0-9_-]+)/', $url, $matches)) {
+            throw new Exception('URL do Instagram inválida. Use links de posts (/p/) ou reels (/reel/).');
+        }
+
+        $type      = $matches[1];
+        $shortcode = $matches[2];
+        $cleanUrl  = "https://www.instagram.com/{$type}/{$shortcode}/";
+
+        $ch = self::createCurl($cleanUrl);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'Accept-Language: en-US,en;q=0.5',
+            'Cache-Control: no-cache',
+            'Pragma: no-cache',
+            'Sec-Fetch-Dest: document',
+            'Sec-Fetch-Mode: navigate',
+            'Sec-Fetch-Site: none',
+            'Sec-Fetch-User: ?1',
+            'Upgrade-Insecure-Requests: 1',
+        ]);
+        $html     = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($html === false || $httpCode === 0) {
+            throw new Exception('Falha ao conectar ao Instagram.');
+        }
+
+        $links = [];
+
+        // Tenta JSON-LD (funciona para posts públicos)
+        if (preg_match('/<script type="application\/ld\+json">(.*?)<\/script>/s', $html, $m)) {
+            $ld = json_decode($m[1], true);
+            if ($ld && isset($ld['contentUrl'])) {
+                $mediaType = isset($ld['@type']) && $ld['@type'] === 'VideoObject' ? 'video' : 'image';
+                if ($mediaType === 'video') {
+                    $links['Vídeo HD'] = $ld['contentUrl'] . '.mp4';
+                } else {
+                    $links['Imagem HD'] = $ld['contentUrl'];
+                }
+            }
+        }
+
+        // Tenta extrair video_url do JSON embutido na página
+        if (empty($links)) {
+            if (preg_match('/"video_url"\s*:\s*"(https:[^"]+)"/', $html, $m)) {
+                $links['Vídeo HD'] = self::cleanStr($m[1]) . '.mp4';
+            }
+        }
+
+        // Tenta extrair display_url para imagens
+        if (empty($links)) {
+            if (preg_match('/"display_url"\s*:\s*"(https:[^"]+)"/', $html, $m)) {
+                $links['Imagem HD'] = self::cleanStr($m[1]);
+            }
+        }
+
+        // Tenta extrair da tag og:video ou og:image como fallback
+        if (empty($links)) {
+            if (preg_match('/<meta property="og:video" content="([^"]+)"/', $html, $m)) {
+                $links['Vídeo'] = html_entity_decode($m[1], ENT_QUOTES) . '.mp4';
+            } elseif (preg_match('/<meta property="og:image" content="([^"]+)"/', $html, $m)) {
+                $links['Imagem'] = html_entity_decode($m[1], ENT_QUOTES);
+            }
+        }
+
+        if (empty($links)) {
+            throw new Exception('Não foi possível extrair o conteúdo. O Instagram pode exigir login para este post.');
+        }
+
+        return ['links' => $links];
+    }
+
+    /**
+     * Download do Facebook via scraping com múltiplos padrões de regex
+     * @param string $url
+     * @return array
+     */
+    public static function facebookDownload($url)
+    {
+        $ch = self::createCurl($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'Accept-Language: en-US,en;q=0.9',
+            'Cache-Control: no-cache',
+            'Pragma: no-cache',
+            'Sec-Fetch-Dest: document',
+            'Sec-Fetch-Mode: navigate',
+            'Sec-Fetch-Site: none',
+            'Sec-Fetch-User: ?1',
+            'Upgrade-Insecure-Requests: 1',
+        ]);
+        $html     = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error    = curl_error($ch);
+        curl_close($ch);
+
+        if ($html === false || $httpCode === 0) {
+            throw new Exception('Falha ao conectar ao Facebook: ' . $error);
+        }
+
+        $links  = [];
+        $title  = self::getTitle($html);
+
+        // Padrões HD
+        $hdPatterns = [
+            '/playable_url_quality_hd["\\\\]+\s*:\s*["\\\\]+(https:[^"\\\\]+)/',
+            '/browser_native_hd_url["\\\\]+\s*:\s*["\\\\]+(https:[^"\\\\]+)/',
+            '/"hd_src"\s*:\s*"(https:[^"]+)"/',
+            '/hd_src_no_ratelimit":"([^"]+)"/',
+        ];
+
+        foreach ($hdPatterns as $pattern) {
+            if (preg_match($pattern, $html, $m)) {
+                $links['Vídeo HD'] = self::cleanStr($m[1]);
+                break;
+            }
+        }
+
+        // Padrões SD
+        $sdPatterns = [
+            '/playable_url["\\\\]+\s*:\s*["\\\\]+(https:[^"\\\\]+)/',
+            '/browser_native_sd_url["\\\\]+\s*:\s*["\\\\]+(https:[^"\\\\]+)/',
+            '/"sd_src"\s*:\s*"(https:[^"]+)"/',
+            '/sd_src_no_ratelimit":"([^"]+)"/',
+        ];
+
+        foreach ($sdPatterns as $pattern) {
+            if (preg_match($pattern, $html, $m)) {
+                $links['Vídeo SD'] = self::cleanStr($m[1]);
+                break;
+            }
+        }
+
+        if (empty($links)) {
+            throw new Exception('Nenhum vídeo encontrado. O vídeo pode ser privado ou o Facebook pode estar bloqueando a requisição.');
+        }
+
+        return ['title' => $title, 'links' => $links];
+    }
+}
+?>
