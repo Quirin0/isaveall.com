@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace Hub;
 
 use Exception;
