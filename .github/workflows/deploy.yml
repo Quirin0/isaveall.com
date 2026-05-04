@@ -1,5 +1,5 @@
 on: push
-name: isaveall.com
+name: isaveall.servermq.uk
 jobs:
   web-deploy:
     name: 🎉 Deploy
